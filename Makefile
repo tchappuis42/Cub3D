@@ -29,7 +29,7 @@ MLX_INC = $(MLX_DIR)
 MLX_LIB =  -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 all:   $(NAME)
-$(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJS)
+$(NAME): $(LIBFT) $(MLX_LIB) $(OBJ_DIR) $(OBJS)
 	@printf "$(YEL)\n------------Compiling----------------\n$(RESET)"
 	@printf "$(RESET)$(CC) $(CFLAGS)\n"
 	@$(CC) $(CFLAGS) -I $(MLX_DIR)/mlx.h -o $@ $(OBJS) $(LIBFT_LIB) $(MLX_LIB)
@@ -45,7 +45,7 @@ $(OBJ_DIR):
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
-$(MLX):
+$(MLX_LIB):
 	@make -C $(MLX_DIR)
 
 clean:
