@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:20:09 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/04 19:38:15 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:27:19 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,8 +110,8 @@ t_list	*ft_lstnew(void *content);
 
 int		ft_lstsize(t_list *lst);
 
-int		tablen(char **s);
+int		ft_tablen(char **s);
 
-void	tabfree(char **s);
+void	ft_tabfree(char **s);
 
 #endif

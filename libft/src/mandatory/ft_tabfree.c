@@ -6,13 +6,13 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:34:25 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 19:34:59 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:26:37 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	tabfree(char **s)
+void	ft_tabfree(char **s)
 {
 	int	i;
 

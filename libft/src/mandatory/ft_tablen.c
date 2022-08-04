@@ -6,13 +6,13 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:35:13 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 19:36:47 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:26:42 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	tablen(char **s)
+int	ft_tablen(char **s)
 {
 	int	i;
 
