@@ -1,11 +1,10 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// struct pour la map
-
 # include "stdio.h"
 # include <fcntl.h>
 
+// struct pour la map
 typedef struct s_data
 {
 	char **map; // map en double tab
