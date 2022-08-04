@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:26:24 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 20:14:04 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:29:31 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exit_map(int type, t_data *data)
 		printf("Error : forbiden char\n");
 	if (type == 4)
 		printf("Error : trop de player\n");
-	tabfree(data);
+	ft_tabfree(data->map);
 	exit(1);
 }
 

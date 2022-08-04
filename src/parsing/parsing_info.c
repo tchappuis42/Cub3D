@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:00:06 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 20:13:23 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:21:55 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,23 @@ static void	get_info(t_tex *tex, char **info)
 		tex->c = strdup(info[1]);
 	else
 		exit (0);
+}
+
+int	info_f(t_tex *tex)
+{
+	if (tex->c == NULL)
+		return (1);
+	if (tex->no == NULL)
+		return (1);
+	if (tex->so == NULL)
+		return (1);
+	if (tex->ea == NULL)
+		return (1);
+	if (tex->we == NULL)
+		return (1);
+	if (tex->f == NULL)
+		return (1);
+	return (0);
 }
 
 void	parcing_info(t_data *data, t_tex *tex, char *map)

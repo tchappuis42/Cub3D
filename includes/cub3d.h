@@ -3,6 +3,9 @@
 
 # include "stdio.h"
 # include <fcntl.h>
+# include <string.h>
+# include "../getnextline/get_next_line.h"
+# include "../libft/includes/libft.h"
 
 // struct pour la map
 typedef struct s_data
