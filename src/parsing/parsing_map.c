@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:57:07 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 19:38:04 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:57:45 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	get_info_map(char *map, t_data *data)
 	int		i;
 
 	i = data->i - 1;
-
 	fd = openfd(map);
 	read = get_next_line(fd);
 	data->w = strlen(read);
@@ -42,7 +41,7 @@ void	get_info_map(char *map, t_data *data)
 
 static void	makemap(char *tompon, t_data *data, int y)
 {
-	int x;
+	int	x;
 
 	x = 0;
 	while (tompon[x] != '\0' && tompon[x] != '\n')

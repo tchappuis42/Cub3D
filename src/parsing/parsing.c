@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:26:24 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 19:39:03 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 19:56:25 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exit_map(int type, t_data *data)
 	exit(1);
 }
 
-int		openfd(char *map)
+int	openfd(char *map)
 {
 	int	fd;
 
