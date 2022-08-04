@@ -15,6 +15,7 @@ void game_start(void)
 void game_loop(t_mlx *mlx)
 {
 	game_event(mlx);
+	new_frame(mlx);
 	mlx_loop(mlx);
 }
 
