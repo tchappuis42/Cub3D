@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:10:15 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 19:55:47 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:08:42 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,15 @@ static void	borders_y(t_data *data, int y, int w)
 		exit_map(1, data);
 }
 
+static void	init_player(t_data *data, int y, int x)
+{
+	if (data->p != 0)
+		exit_map(4, data);
+	data->px = x;
+	data->py = y;
+	data->p = data->map[y][x];
+}
+
 static void	forbiden_char(t_data *data, int y, int w)
 {
 	int	i;
@@ -53,7 +62,7 @@ static void	forbiden_char(t_data *data, int y, int w)
 	}
 }
 
-static void	border(t_data *data, int y, int w)
+static void	map_border(t_data *data, int y, int w)
 {
 	int	i;
 

@@ -6,11 +6,11 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:26:24 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 19:56:25 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:14:04 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing/parsing.h"
+#include "../../includes/parsing/parsing.h"
 #include "../../includes/cub3d.h"
 
 void	exit_map(int type, t_data *data)
@@ -64,6 +64,6 @@ void	parsing(t_data *data, t_tex *tex, char *map)
 	init_data(data);
 	parcing_info(data, tex, map);
 	get_info_map(map, data);
-	parcing_map(data, map);
+	parsing_map(data, map);
 	chek_info(data, tex);
 }

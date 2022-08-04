@@ -6,11 +6,11 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:00:06 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 19:56:46 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:13:23 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing/parsing.h"
+#include "../../includes/parsing/parsing.h"
 #include "../../includes/cub3d.h"
 
 static void	get_info(t_tex *tex, char **info)
@@ -39,7 +39,7 @@ void	parcing_info(t_data *data, t_tex *tex, char *map)
 	char	**tab_read;
 	int		fd;
 
-	fd = open_fd(map);
+	fd = openfd(map);
 	read = get_next_line(fd);
 	tab_read = ft_split(read, ' ');
 	while (info_f(tex))

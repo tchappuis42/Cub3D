@@ -6,11 +6,11 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:57:07 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 19:57:45 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/04 20:09:08 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing/parsing.h"
+#include "../../includes/parsing/parsing.h"
 #include "../../includes/cub3d.h"
 
 void	get_info_map(char *map, t_data *data)
