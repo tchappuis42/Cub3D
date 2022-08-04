@@ -24,6 +24,10 @@ SRC 	:=	main.c\
 			game/mechanics/event/custom.c\
 			game/mechanics/event/keyboard.c\
 			game/mechanics/event/window.c\
+			parsing/parsing.c\
+			parsing/parsing_info.c\
+			parsing/parsing_map.c\
+			parsing/chek_info.c\
 
 SRCS 	:= $(addprefix  $(SRC_DIR), $(SRC))
 
