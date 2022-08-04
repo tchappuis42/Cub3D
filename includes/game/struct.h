@@ -2,7 +2,7 @@
 #ifndef STRUCT_H
 #define STRUCT_H
 
-enum
+enum // t as le droit bg ?
 {
 	KEY_A = 0,
 	KEY_S = 1,
