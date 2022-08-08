@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:00:06 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/08 16:08:40 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:54:28 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,14 @@ static int	get_color(char *str)
 	if (ft_tablen(tab) > 3)
 		printf("null");
 	r = ft_atoi(tab[0]);
+	if (r > 255)
+		printf("NULLAR\n");
 	g = ft_atoi(tab[1]);
+	if (g > 255)
+		printf("NULLAR\n");
 	b = ft_atoi(tab[2]);
+	if (b > 255)
+		printf("NULLAR\n");
 	return (ft_rgb(r, g, b));
 }
 
@@ -47,7 +53,7 @@ static void	get_info(t_tex *tex, char **info, t_data *data)
 
 	if (ft_tablen(info) > 2)
 		exit(1);
-	if (ft_strcmp(info[0], "NO") == 0)
+	if (!(ft_strcmp(info[0], "NO")))
 		tex->no = ft_strdup(info[1]);
 	else if (!(ft_strcmp(info[0], "SO")))
 		tex->so = ft_strdup(info[1]);
@@ -80,6 +86,14 @@ int	info_f(t_tex *tex)
 	return (0);
 }
 
+void	remove_enter(t_tex *tex)
+{
+	tex->no[ft_strlen(tex->no) - 1] = 0;
+	tex->so[ft_strlen(tex->so) - 1] = 0;
+	tex->ea[ft_strlen(tex->ea) - 1] = 0;
+	tex->we[ft_strlen(tex->we) - 1] = 0;
+}
+
 void	parsing_info(t_data *data, t_tex *tex, char *map)
 {
 	char	*read;
@@ -101,4 +115,5 @@ void	parsing_info(t_data *data, t_tex *tex, char *map)
 	}
 	free (read);
 	ft_tabfree(tab_read);
+	remove_enter(tex);
 }

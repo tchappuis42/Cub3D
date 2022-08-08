@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:26:24 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/08 16:03:44 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/08 17:25:18 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	openfd(char *map)
 
 void	init_texture(t_tex *tex)
 {
-	tex->c = -1;
 	tex->no = NULL;
 	tex->so = NULL;
 	tex->we = NULL;
 	tex->ea = NULL;
+	tex->c = -1;
 	tex->f = -1;
 }
 
