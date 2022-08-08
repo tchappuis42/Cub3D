@@ -6,7 +6,7 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:10:15 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/05 10:30:19 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/08 13:41:22 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ static void	map_border(t_data *data, int y, int w)
 void	chek_info(t_data *data, t_tex *tex)
 {
 	int	y;
+	(void)tex;
 
 	(void)tex;
 

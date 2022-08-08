@@ -6,7 +6,7 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:57:07 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/05 10:29:45 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/08 13:41:07 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	get_info_map(char *map, t_data *data)
 	while (read != NULL)
 	{
 		if ((int)ft_strlen(read) > data->w)
-			data->w = ft_strlen(read);
+			data->w = strlen(read);
 		data->h++;
 		free(read);
 		read = get_next_line(fd);
