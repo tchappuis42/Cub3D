@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:28:41 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/07 19:36:10 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:04:08 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ typedef struct s_texture
 	char	*so;
 	char	*we;
 	char	*ea;
-	char	*f;
-	char	*c;
+	int		f;
+	int		c;
 } t_tex;
 
 int		openfd(char *map);
-void	parcing_info(t_data *data, t_tex *tex, char *map);
+void	parsing_info(t_data *data, t_tex *tex, char *map);
 void	parsing_map(t_data *data, char *map);
 void	get_info_map(char *map, t_data *data);
-void	chek_info(t_data *data, t_tex *tex);
+void	chek_info(t_data *data, char *map);
 void	exit_map(int type, t_data *data);
 
 #endif

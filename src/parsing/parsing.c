@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:26:24 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/08 13:35:24 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/08 16:03:44 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ void	exit_map(int type, t_data *data)
 		printf("Error : forbiden char\n");
 	if (type == 4)
 		printf("Error : trop de player\n");
-	ft_tabfree(data->map);
+	if (data->map != NULL)
+		ft_tabfree(data->map);
 	exit(1);
 }
 
@@ -33,18 +34,18 @@ int	openfd(char *map)
 
 	fd = open(map, O_RDONLY);
 	if (fd < 1)
-		exit (0); // todo
+		exit (0);
 	return (fd);
 }
 
 void	init_texture(t_tex *tex)
 {
-	tex->c = NULL;
+	tex->c = -1;
 	tex->no = NULL;
 	tex->so = NULL;
 	tex->we = NULL;
 	tex->ea = NULL;
-	tex->f = NULL;
+	tex->f = -1;
 }
 
 void	init_data(t_data *data)
@@ -60,13 +61,10 @@ void	init_data(t_data *data)
 
 void	parsing(t_data *data, t_tex *tex, char *map)
 {
-	
 	init_texture(tex);
 	init_data(data);
-	
-	//parcing_info(data, tex, map);
+	parsing_info(data, tex, map);
 	get_info_map(map, data);
 	parsing_map(data, map);
-	chek_info(data, tex);
-	
+	chek_info(data, map);
 }

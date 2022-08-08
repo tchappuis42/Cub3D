@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:57:07 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/08 13:41:07 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:17:03 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	get_info_map(char *map, t_data *data)
 	while (read != NULL)
 	{
 		if ((int)ft_strlen(read) > data->w)
-			data->w = strlen(read);
+			data->w = ft_strlen(read);
 		data->h++;
 		free(read);
 		read = get_next_line(fd);

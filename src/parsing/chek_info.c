@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chek_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:10:15 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/08 13:41:22 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/08 15:25:38 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,13 +83,12 @@ static void	map_border(t_data *data, int y, int w)
 	}
 }
 
-void	chek_info(t_data *data, t_tex *tex)
+void	chek_info(t_data *data, char *map)
 {
 	int	y;
-	(void)tex;
 
-	(void)tex;
-
+	if (ft_strncmp(map + ft_strlen(map) - 4, ".cub", 5) != 0)
+		exit_map(4, data);
 	y = 0;
 	while (data->map[y])
 	{

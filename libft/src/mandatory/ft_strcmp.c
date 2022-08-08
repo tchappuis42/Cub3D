@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 10:26:43 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/05 10:27:07 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/08 14:29:25 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s++;
 		d++;
 	}
-	return (0);
+	return (*s - *d);
 }
