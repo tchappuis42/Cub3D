@@ -6,10 +6,11 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 17:44:48 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/02 15:54:38 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/05 10:37:30 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
 int	ft_atoi(const char *str)
 {

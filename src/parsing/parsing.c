@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:26:24 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 20:29:31 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/08 13:35:24 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing/parsing.h"
-#include "../../includes/cub3d.h"
+#include "game/game.h"
 
 void	exit_map(int type, t_data *data)
 {
@@ -37,7 +37,7 @@ int	openfd(char *map)
 	return (fd);
 }
 
-static void	init_texture(t_tex *tex)
+void	init_texture(t_tex *tex)
 {
 	tex->c = NULL;
 	tex->no = NULL;
@@ -47,7 +47,7 @@ static void	init_texture(t_tex *tex)
 	tex->f = NULL;
 }
 
-static void	init_data(t_data *data)
+void	init_data(t_data *data)
 {
 	data->h = 0;
 	data->w = 0;
@@ -60,10 +60,13 @@ static void	init_data(t_data *data)
 
 void	parsing(t_data *data, t_tex *tex, char *map)
 {
+	
 	init_texture(tex);
 	init_data(data);
-	parcing_info(data, tex, map);
+	
+	//parcing_info(data, tex, map);
 	get_info_map(map, data);
 	parsing_map(data, map);
 	chek_info(data, tex);
+	
 }

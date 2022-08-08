@@ -36,6 +36,6 @@ int exit_game2(void *param)
 void exit_window(t_mlx *mlx)
 {
 
-	mlx_hook(mlx->win, KEYPRESS, 0, exit_game, NULL);
+	//mlx_hook(mlx->win, KEYPRESS, 0, exit_game, NULL);
 	mlx_hook(mlx->win, DESTROYNOTIFY, 0, exit_game2, NULL);
 }

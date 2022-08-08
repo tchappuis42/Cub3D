@@ -7,27 +7,35 @@ RESET	= \033[0m
 
 NAME 	:= Cub3d
 CC 		:= gcc
-CFLAGS	= -Wall -Wextra -Werror -I $(INC_DIR) -I $(MLX_INC)
+CFLAGS	= -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_INC) -I $(MLX_INC) -g -fsanitize=address
 
 SRC_DIR := ./src/
 OBJ_DIR	:= ./obj/
 OBJ_SUBDIR :=	./obj/game\
-				./obj/game/graphic\
+				./obj/parsing\
+				./obj/game/graphics\
 				./obj/game/mechanics\
 				./obj/game/mechanics/event
 
 INC_DIR := ./includes
 
 SRC 	:=	main.c\
-			game/mechanics/game.c\
-			game/mechanics/init.c\
-			game/mechanics/event/custom.c\
-			game/mechanics/event/keyboard.c\
-			game/mechanics/event/window.c\
 			parsing/parsing.c\
 			parsing/parsing_info.c\
 			parsing/parsing_map.c\
 			parsing/chek_info.c\
+			game/mechanics/game.c\
+			game/mechanics/game_info.c\
+			game/mechanics/event/custom.c\
+			game/mechanics/event/keyboard.c\
+			game/mechanics/event/window.c\
+			game/graphics/frame.c\
+			game/graphics/camera.c\
+			game/graphics/visualisator.c\
+			game/graphics/raycasting.c
+
+			
+			
 
 SRCS 	:= $(addprefix  $(SRC_DIR), $(SRC))
 
@@ -36,6 +44,7 @@ OBJS	:= $(addprefix $(OBJ_DIR), $(OBJ))
 
 
 LIBFT_DIR = libft
+LIBFT = libft/libft.a
 LIBFT_INC = libft/includes
 LIBFT_LIB = -L $(LIBFT_DIR)
 
@@ -48,7 +57,7 @@ all:   $(NAME)
 $(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJS)
 	@printf "$(YEL)\n------------Compiling----------------\n$(RESET)"
 	@printf "$(RESET)$(CC) $(CFLAGS)\n"
-	@$(CC) $(CFLAGS) -I $(MLX_DIR)/mlx.h -o $@ $(OBJS) $(LIBFT_LIB) $(MLX_LIB)
+	@$(CC) $(CFLAGS) -I $(MLX_DIR)/mlx.h -o $@ $(OBJS) $(LIBFT) $(MLX_LIB)
 	@printf "$(YEL)------------Linked------------------\n$(RESET)"
 	@printf "$(GREEN)$(NAME) sucessfully created ! $(RESET)\n"
 

@@ -2,18 +2,34 @@
 #define GAME_H
 
 #include "game/struct.h"
+#include "game/camera.h"
+#include "parsing/parsing.h"
+
+typedef struct s_game
+{
+	t_mlx		mlx;
+	t_data		*map;
+	t_camera	camera;
+	
+}t_game;
+
 
 // init the graphic lib
-void graphic_lib_init(t_mlx *mlx);
+void init_graphic_lib(t_game *game_info);
+
+void init_game_info(t_game *game_info, t_data *map);
 
 // routine of the game
-void game_loop(t_mlx *mlx);
+void game_loop(t_game *game_info);
 
 // start the event of the game
-void game_event(t_mlx *mlx);
+void game_event(t_game *game_info);
+int new_frame(void *param);
+void init_new_frame(t_frame *new_frame, t_mlx *mlx);
+void creating_frame(t_frame *frame, t_game *game_info);
+void visualisator(t_mlx *mlx, t_data *data);
 
-
-
+void printMap(t_game *game_info);
 
 //  ––––––––––––––––––––
 // |       EVENT        |
@@ -26,16 +42,18 @@ void resize_window(t_mlx *mlx);
 void exit_window(t_mlx *mlx);
 
 // manage the events triggered by the keyboard
-void keyboard_event_management(t_mlx *mlx);
+void keyboard_event_management(t_game *game_info);
 // enable the movement of the character
-void movement_of_the_character(t_mlx *mlx);
+void movement_of_the_character(t_game *game_info);
 // enable the movement of the camera
-void movement_of_the_camera(t_mlx *mlx);
+void movement_of_the_camera(t_game *game_info);
 
 // handle the other event needed by the game
-void custom_event_management(t_mlx *mlx);
+void custom_event_management(t_game *game_info);
 
+t_camera *init_camera(t_camera *camera, double x, double y);
 
+void raycasting(t_camera *camera, t_data *map, t_frame *fram, double x, double y, t_draw *line_to_draw);
 
 
 

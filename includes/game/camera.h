@@ -1,0 +1,22 @@
+#ifndef CAMERA_H
+#define CAMERA_H
+
+// The camera represent the player's point of view
+typedef struct s_camera
+{
+	double	posX;			  //posX
+	double	posY;			  //posY
+	double	playerDirectionX; //dirX
+	double	playerDirectionY; //dirY
+	double	virtualScreenX;   //planeX
+	double	virtualScreenY;	  //planeY
+	double	X;				  //cameraX
+
+}t_camera;
+
+void vector_player_position(t_camera *camera, double x, double y);
+void vector_player_direction(t_camera *camera);
+void vector_camera_screen(t_camera *camera);
+
+
+#endif

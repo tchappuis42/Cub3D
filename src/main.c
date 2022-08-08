@@ -9,12 +9,12 @@ int main(int argc, char **argv)
 	if (argc == 2)
 	{
 		parsing(&data, &tex, argv[1]);	
-		game_start();
-		int i = 0;
-		while(data.map[i])
-		{
-			printf("%s\n", data.map[i]);
-			i++;
-		}
+		game_start(&data);
+		//int i = 0;
+		// while(data.map[i])
+		// {
+		// 	printf("%s\n", data.map[i]);
+		// 	i++;
+		// }
 	}
 }

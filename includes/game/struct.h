@@ -92,11 +92,7 @@ enum
 	LASTEVENT = 36
 };
 
-typedef struct s_mlx // écran
-{
-	void *ptr; // -> pointeur sur la mlx
-	void *win; // pointeur sur la window
-} t_mlx;
+
 
 typedef struct s_frame
 {
@@ -108,6 +104,26 @@ typedef struct s_frame
 	int color;	// color of the image
 	int width;	// width of the image
 	int height; // height of the image
-} frame;
+} t_frame;
+
+typedef struct s_mlx // écran
+{
+	void *ptr; // -> pointeur sur la mlx
+	void *win; // pointeur sur la window
+	t_frame	*frame_ptr;
+} t_mlx;
+
+typedef struct s_draw
+{
+	int lineHeight;
+	int drawStart;
+    int drawEnd;
+	int side;
+	int mapX;
+	int mapY;
+}t_draw;
+
+
+
 
 #endif

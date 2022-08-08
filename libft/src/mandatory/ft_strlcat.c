@@ -6,10 +6,11 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 15:18:06 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/02 15:55:36 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/05 10:36:40 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 
 size_t	ft_strlcat(char *dest, const char *src, size_t dstsize)
 {

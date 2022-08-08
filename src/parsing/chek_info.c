@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   chek_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:10:15 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 20:08:42 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:30:19 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing/parsing.h"
-#include "../../includes/cub3d.h"
 
 static void	borders_x(t_data *data, int y)
 {
@@ -87,6 +86,8 @@ static void	map_border(t_data *data, int y, int w)
 void	chek_info(t_data *data, t_tex *tex)
 {
 	int	y;
+
+	(void)tex;
 
 	y = 0;
 	while (data->map[y])

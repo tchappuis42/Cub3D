@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:20:09 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/04 20:27:19 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/05 10:33:52 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <unistd.h>
 # include <stdlib.h>
 # define UINT_MAX 4294967295U
+
+# define BUFFER_SIZE 1024
 
 typedef struct s_list
 {
@@ -113,5 +115,13 @@ int		ft_lstsize(t_list *lst);
 int		ft_tablen(char **s);
 
 void	ft_tabfree(char **s);
+
+char	*get_next_line(int fd);
+
+char	*ft_printstr(char *buffer, char *rtn);
+
+int	ft_strcmp(const char *s1, const char *s2);
+
+
 
 #endif
