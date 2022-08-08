@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:10:15 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/04 20:08:42 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/05 14:26:49 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ static void	map_border(t_data *data, int y, int w)
 void	chek_info(t_data *data, t_tex *tex)
 {
 	int	y;
+	(void)tex;
 
 	y = 0;
 	while (data->map[y])
