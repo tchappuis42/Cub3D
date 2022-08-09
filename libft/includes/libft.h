@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:20:09 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/05 10:33:52 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/08 14:40:29 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # define UINT_MAX 4294967295U
 
-# define BUFFER_SIZE 1024
+# define BUFFER_SIZE 1
 
 typedef struct s_list
 {
@@ -121,7 +121,5 @@ char	*get_next_line(int fd);
 char	*ft_printstr(char *buffer, char *rtn);
 
 int	ft_strcmp(const char *s1, const char *s2);
-
-
 
 #endif

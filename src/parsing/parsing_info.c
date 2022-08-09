@@ -6,53 +6,19 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:00:06 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/08 17:54:28 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/09 15:59:15 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing/parsing.h"
-#include <string.h>
-
-static int	ft_rgb(int r, int g, int b)
-{
-	int	color;
-
-	color = 0;
-	color = r;
-	color = color << 8;
-	color += g;
-	color = color << 8;
-	color += b;
-	return (color);
-}
-
-static int	get_color(char *str)
-{
-	char	**tab;
-	int		r;
-	int		g;
-	int		b;
-
-	tab = ft_split(str, ',');
-	if (ft_tablen(tab) > 3)
-		printf("null");
-	r = ft_atoi(tab[0]);
-	if (r > 255)
-		printf("NULLAR\n");
-	g = ft_atoi(tab[1]);
-	if (g > 255)
-		printf("NULLAR\n");
-	b = ft_atoi(tab[2]);
-	if (b > 255)
-		printf("NULLAR\n");
-	return (ft_rgb(r, g, b));
-}
 
 static void	get_info(t_tex *tex, char **info, t_data *data)
 {
-
 	if (ft_tablen(info) > 2)
-		exit(1);
+	{
+		if (info[2][0] != '\n')
+			exit_map(6, data);
+	}
 	if (!(ft_strcmp(info[0], "NO")))
 		tex->no = ft_strdup(info[1]);
 	else if (!(ft_strcmp(info[0], "SO")))
@@ -62,11 +28,11 @@ static void	get_info(t_tex *tex, char **info, t_data *data)
 	else if (!(ft_strcmp(info[0], "WE")))
 		tex->we = ft_strdup(info[1]);
 	else if (!(ft_strcmp(info[0], "F")))
-		tex->f = get_color(info[1]);
+		tex->f = get_color(info[1], data);
 	else if (!(ft_strcmp(info[0], "C")))
-		tex->c = get_color(info[1]);
+		tex->c = get_color(info[1], data);
 	else
-		exit_map(4, data); //todo
+		exit_map(6, data);
 }
 
 int	info_f(t_tex *tex)
@@ -101,7 +67,7 @@ void	parsing_info(t_data *data, t_tex *tex, char *map)
 	int		fd;
 
 	fd = openfd(map);
-	read = get_next_line(fd); // todo readline
+	read = get_next_line(fd);
 	tab_read = ft_split(read, ' ');
 	while (info_f(tex))
 	{

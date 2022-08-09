@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:26:24 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/08 17:25:18 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/09 16:33:43 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ void	exit_map(int type, t_data *data)
 		printf("Error : forbiden char\n");
 	if (type == 4)
 		printf("Error : trop de player\n");
+	if (type == 5)
+		printf("Error : color");
+	if (type == 6)
+		printf("Error : ");
+	if (type == 7)
+		printf("Error : Malloc error");
 	if (data->map != NULL)
 		ft_tabfree(data->map);
 	exit(1);

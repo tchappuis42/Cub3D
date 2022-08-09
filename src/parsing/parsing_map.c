@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:57:07 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/08 15:17:03 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/09 17:36:36 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_info_map(char *map, t_data *data)
 	i = data->i - 1;
 	fd = openfd(map);
 	read = get_next_line(fd);
-	data->w = ft_strlen(read);
+	data->w = ft_strlen(read) - 1;
 	while (i-- >= 0 || read[0] == '\n')
 	{
 		free(read);
@@ -31,7 +31,7 @@ void	get_info_map(char *map, t_data *data)
 	while (read != NULL)
 	{
 		if ((int)ft_strlen(read) > data->w)
-			data->w = ft_strlen(read);
+			data->w = ft_strlen(read) - 1;
 		data->h++;
 		free(read);
 		read = get_next_line(fd);
@@ -57,16 +57,25 @@ static void	makemap(char *tompon, t_data *data, int y)
 	data->map[y][x] = 0;
 }
 
+int	init_map_parsing(char *map, t_data *data)
+{
+	int	fd;
+
+	fd = openfd(map);
+	data->map = calloc(data->h + 1, sizeof (char *));
+	if (!data->map)
+		exit_map(7, data);
+	return (fd);
+}
+
 void	parsing_map(t_data *data, char *map)
 {
 	int		y;
 	char	*read;
 	int		fd;
 
-	fd = open(map, O_RDONLY);
 	y = 0;
-	data->map = calloc(data->h + 1, sizeof (char *));
-	// malloc chek
+	fd = init_map_parsing(map, data);
 	read = get_next_line(fd);
 	while (data->i-- > 0 || read[0] == '\n')
 	{
@@ -75,11 +84,14 @@ void	parsing_map(t_data *data, char *map)
 	}
 	while (read != NULL)
 	{
+		if (read[0] == '\n')
+			exit_map(6, data);
 		data->map[y] = calloc(data->w + 1, sizeof (char));
-		//chek malloc
-		makemap(read, data, y);
-		y++;
+		if (!data->map[y])
+			exit_map(7, data);
+		makemap(read, data, y++);
 		free(read);
 		read = get_next_line(fd);
 	}
+	free(read);
 }
