@@ -4,11 +4,12 @@
 #include "../../../mlx/mlx.h"
 
 //	This function start the game after initialize the graphic library
-void game_start(t_data *data)
+void game_start(t_data *data, t_tex *tex)
 {
 	t_game game_info;
 
 	init_game_info(&game_info, data);
+	init_sprit(&game_info, tex);
 	game_loop(&game_info);
 }
 

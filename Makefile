@@ -24,6 +24,7 @@ SRC 	:=	main.c\
 			parsing/parsing_info.c\
 			parsing/parsing_map.c\
 			parsing/chek_info.c\
+			parsing/color.c\
 			game/mechanics/game.c\
 			game/mechanics/game_info.c\
 			game/mechanics/event/custom.c\
@@ -32,10 +33,9 @@ SRC 	:=	main.c\
 			game/graphics/frame.c\
 			game/graphics/camera.c\
 			game/graphics/visualisator.c\
-			game/graphics/raycasting.c
+			game/graphics/raycasting.c\
+			game/graphics/sprit.c\
 
-			
-			
 
 SRCS 	:= $(addprefix  $(SRC_DIR), $(SRC))
 

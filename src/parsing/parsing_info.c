@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:00:06 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/09 15:59:15 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/09 18:02:07 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ static void	get_info(t_tex *tex, char **info, t_data *data)
 			exit_map(6, data);
 	}
 	if (!(ft_strcmp(info[0], "NO")))
-		tex->no = ft_strdup(info[1]);
+		tex->path_no = ft_strdup(info[1]);
 	else if (!(ft_strcmp(info[0], "SO")))
-		tex->so = ft_strdup(info[1]);
+		tex->path_so = ft_strdup(info[1]);
 	else if (!(ft_strcmp(info[0], "EA")))
-		tex->ea = ft_strdup(info[1]);
+		tex->path_ea = ft_strdup(info[1]);
 	else if (!(ft_strcmp(info[0], "WE")))
-		tex->we = ft_strdup(info[1]);
+		tex->path_we = ft_strdup(info[1]);
 	else if (!(ft_strcmp(info[0], "F")))
 		tex->f = get_color(info[1], data);
 	else if (!(ft_strcmp(info[0], "C")))
@@ -39,13 +39,13 @@ int	info_f(t_tex *tex)
 {
 	if (tex->c == -1)
 		return (1);
-	if (tex->no == NULL)
+	if (tex->path_no == NULL)
 		return (1);
-	if (tex->so == NULL)
+	if (tex->path_so == NULL)
 		return (1);
-	if (tex->ea == NULL)
+	if (tex->path_ea == NULL)
 		return (1);
-	if (tex->we == NULL)
+	if (tex->path_we == NULL)
 		return (1);
 	if (tex->f == -1)
 		return (1);
@@ -54,10 +54,10 @@ int	info_f(t_tex *tex)
 
 void	remove_enter(t_tex *tex)
 {
-	tex->no[ft_strlen(tex->no) - 1] = 0;
-	tex->so[ft_strlen(tex->so) - 1] = 0;
-	tex->ea[ft_strlen(tex->ea) - 1] = 0;
-	tex->we[ft_strlen(tex->we) - 1] = 0;
+	tex->path_no[ft_strlen(tex->path_no) - 1] = 0;
+	tex->path_so[ft_strlen(tex->path_so) - 1] = 0;
+	tex->path_ea[ft_strlen(tex->path_ea) - 1] = 0;
+	tex->path_we[ft_strlen(tex->path_we) - 1] = 0;
 }
 
 void	parsing_info(t_data *data, t_tex *tex, char *map)

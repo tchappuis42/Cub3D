@@ -13,11 +13,13 @@ typedef struct s_game
 	
 }t_game;
 
-
 // init the graphic lib
 void init_graphic_lib(t_game *game_info);
 
 void init_game_info(t_game *game_info, t_data *map);
+
+//init the wall sprit
+void	init_sprit(t_game *game, t_tex *tex);
 
 // routine of the game
 void game_loop(t_game *game_info);
