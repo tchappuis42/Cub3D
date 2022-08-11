@@ -7,15 +7,14 @@ RESET	= \033[0m
 
 NAME 	:= Cub3d
 CC 		:= gcc
-CFLAGS	= -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_INC) -I $(MLX_INC) -g -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_INC) -I $(MLX_INC) #-g3 -fsanitize=address
 
 SRC_DIR := ./src/
 OBJ_DIR	:= ./obj/
 OBJ_SUBDIR :=	./obj/game\
 				./obj/parsing\
 				./obj/game/graphics\
-				./obj/game/mechanics\
-				./obj/game/mechanics/event
+				./obj/game/event
 
 INC_DIR := ./includes
 
@@ -25,16 +24,13 @@ SRC 	:=	main.c\
 			parsing/parsing_map.c\
 			parsing/chek_info.c\
 			parsing/color.c\
-			game/mechanics/game.c\
-			game/mechanics/game_info.c\
-			game/mechanics/event/custom.c\
-			game/mechanics/event/keyboard.c\
-			game/mechanics/event/window.c\
-			game/graphics/frame.c\
-			game/graphics/camera.c\
-			game/graphics/visualisator.c\
+			game/game.c\
+			game/texture.c\
+			game/event/event.c\
+			game/event/movement.c\
 			game/graphics/raycasting.c\
-			game/graphics/sprit.c\
+			game/graphics/screen.c\
+			game/camera.c
 
 
 SRCS 	:= $(addprefix  $(SRC_DIR), $(SRC))
@@ -64,7 +60,7 @@ $(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJS)
 $(OBJS): $(SRCS)
 	@$(CC) $(CFLAGS) -o $@ -c $(subst obj/, $(SRC_DIR), $*).c
 
-$(OBJ_DIR):
+$(OBJ_DIR): 
 	@mkdir -p $(OBJ_DIR)
 	@mkdir -p $(OBJ_SUBDIR)
 
