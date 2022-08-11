@@ -25,6 +25,7 @@ SRC 	:=	main.c\
 			parsing/parsing_map.c\
 			parsing/chek_info.c\
 			parsing/color.c\
+			parsing/exit_map.c\
 			game/mechanics/game.c\
 			game/mechanics/game_info.c\
 			game/mechanics/event/custom.c\

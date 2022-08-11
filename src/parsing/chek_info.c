@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 19:10:15 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/09 16:15:18 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/11 14:54:45 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ static void	forbiden_char(t_data *data, int y, int w)
 			if (data->map[y][i] == 'N' || data->map[y][i] == 'S'
 				|| data->map[y][i] == 'E' || data->map[y][i] == 'W')
 			{
+				data->map[y][i] = '0';
 				if (data->p != 0)
 					exit_map(4, data);
 				data->px = i;
