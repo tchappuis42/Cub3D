@@ -6,7 +6,7 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:28:41 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/10 15:49:09 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/11 16:24:58 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,7 @@
 # include <fcntl.h>
 #include "libft.h"
 
-// struct pour la map
-typedef struct s_data
-{
-	char **map; // map en double tab
-	int		h;  // change nom
-	int		w;	// change nom
-	double	px; // 
-	double	py; //
-	char	p;  // 
-	int		i; // pour le parcing
-}	t_data;
+
 
 //lien des fichiers pour les textures
 typedef struct s_texture 
@@ -42,6 +32,19 @@ typedef struct s_texture
 	void	*we;
 	void	*ea;
 } t_tex;
+
+// struct pour la map
+typedef struct s_data
+{
+	char **map; // map en double tab
+	int		h;  // change nom
+	int		w;	// change nom
+	double	px; // 
+	double	py; //
+	char	p;  // 
+	int		i; // pour le parcing
+	t_tex*	tex;
+}	t_data;
 
 int		openfd(char *map);
 void	parsing_info(t_data *data, t_tex *tex, char *map);
