@@ -1,143 +1,185 @@
-#include "game/raycasting.h"
-#include "game/camera.h"
-#include "game/game.h"
-#include "parsing/parsing.h"
-#include <math.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/11 14:37:14 by tweimer           #+#    #+#             */
+/*   Updated: 2022/08/11 16:04:08 by tweimer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void raycasting(t_camera *camera, t_data *map, t_frame *frame, double x, double y, t_draw *line_to_draw)
+#include "game/raycasting.h"
+#include "../../../mlx/mlx.h"
+
+void	calculate_screen(t_game *info)
 {
-	t_ray 	ray;
-	
-	
-	(void)y;
-	initialize_ray(&ray, (double)frame->width, x, y, camera);
-	initialize_ray2(&ray, (double)frame->width, x, y, camera);
-	initialize_ray3(&ray, (double)frame->width, x, y, camera);
-	
-	performDDA(&ray, map);
-	calculate_drawing(line_to_draw, &ray, frame->height);
-	
-	
-	//ray->stepX = sqrt(1 + (ray->directionY * ray->directionY) / (ray->directionX * ray->directionX));
-	//ray->stepY = sqrt(1 + ( * ray->directionX) / (ray->directionY * ray->directionY));
+	int		x;
+	t_ray	ray;
+
+	x = 0;
+	info->buffer = init_buffer();
+	while (x < WIDTH)
+	{
+		calculate_wall(&ray, info, x);
+		calculate_texture(info, &ray, x);
+		x++;
+	}
 }
 
-void initialize_ray(t_ray *ray, double width, double x, double y, t_camera *camera)
+int	*init_buffer(void)
 {
-	(void)y;
-	camera->X = 2 * x / width - 1;
+	int		i;
+	int		*buffer;
 
-	ray->directionX = camera->playerDirectionX + camera->virtualScreenX * camera->X;
-	ray->directionY = camera->playerDirectionY + camera->virtualScreenY * camera->X;
-	//ray->nextTileX = sqrt(1 + (ray->directionY * ray->directionY) / (ray->directionX * ray->directionX));
-	//ray->nextTileY = sqrt(1 + (ray->directionX * ray->directionX) / (ray->directionY * ray->directionY));
+	i = 0;
+	buffer = malloc(sizeof(int *) * HEIGHT * WIDTH);
+	while (i < HEIGHT * WIDTH)
+	{
+		
+		buffer[i] = 0;
+		i++;
+	}
+	return (buffer);
+}
 
+void	calculate_wall(t_ray *ray, t_game *info, int x)
+{
+	init_ray(ray, info, x);
+	length_ray(ray, info);
+	performDDA(ray, info->map);
+	get_wall_info(ray, info);
+}
 
+void	init_ray(t_ray *ray, t_game *info, double x)
+{
+	t_camera	*camera;
+
+	camera = &info->camera;
+	camera->X = 2 * x / WIDTH - 1;
+	ray->directionX = camera->playerDirectionX + camera->screenX * camera->X;
+	ray->directionY = camera->playerDirectionY + camera->screenY * camera->X;
 	ray->nextTileX = fabs(1 / ray->directionX);
 	ray->nextTileY = fabs(1 / ray->directionY);
-	//printf("ray->directionX %f, ray->directionY %f \nray->nextTileY %f, ray->nextTileX %f\n", ray->directionX, ray->directionY, ray->nextTileY, ray->nextTileX);
-	//printf("%f\n",camera->X);
-	// static int i = 0;
-	// if (i == 1081)
-	// 	exit(0);
-	// i++;
-}
-
-void initialize_ray2(t_ray *ray, double width, double x, double y, t_camera *camera)
-{
-	(void)y;
-	(void)x;
-	(void)width;
-
 	ray->mapX = (int)camera->posX;
 	ray->mapY = (int)camera->posY;
-	//	printf("camera->posX %f mapX %d\n, camera->posY %f mapY %d\n", camera->posX,ray->mapX,   camera->posY, ray->mapY);
 	if (ray->directionX == 0)
-		ray->nextTileX = 1e30; //1e30
+		ray->nextTileX = 1e30;
 	else
-		ray->nextTileX = fabs(1 / ray->directionX );
-		//ray->nextTileX = sqrt(1 + (ray->directionY * ray->directionY) / (ray->directionX * ray->directionX));
-		
+		ray->nextTileX = fabs(1 / ray->directionX);
 	if (ray->directionY == 0)
-		ray->nextTileY = 1e30;//1e30
+		ray->nextTileY = 1e30;
 	else
 		ray->nextTileY = fabs(1 / ray->directionY);
-		//ray->nextTileY = sqrt(1 + (ray->directionX * ray->directionX) / (ray->directionY * ray->directionY));
-	
 	ray->hit = 0;
 }
 
-void initialize_ray3(t_ray *ray, double width, double x, double y, t_camera *camera)
+void	length_ray(t_ray *ray, t_game *info)
 {
-	(void)y;
-	(void)x;
-	(void)width;
+	t_camera	*camera;
+
+	camera = &info->camera;
 	if (ray->directionX < 0)
 	{
-		ray->towardX = -1;	
-		ray->lenghtX = (camera->posX - ray->mapX) * ray->nextTileX;
+		ray->towardX = -1;
+		ray->lengthX = (camera->posX - ray->mapX) * ray->nextTileX;
 	}
 	else
-    { 
+	{
 		ray->towardX = -1;
-		ray->lenghtX = (ray->mapX + 1.0 - camera->posX) * ray->nextTileX;
-    } 
-   	if (ray->directionY < 0) 
-    {
-		ray->towardY = -1; 
-		ray->lenghtY = (camera->posY - ray->mapY) * ray->nextTileY; 
-    }
+		ray->lengthX = (ray->mapX + 1.0 - camera->posX) * ray->nextTileX;
+	}
+	if (ray->directionY < 0)
+	{
+		ray->towardY = -1;
+		ray->lengthY = (camera->posY - ray->mapY) * ray->nextTileY;
+	}
 	else
-    { 
-    	ray->towardY = 1; 
-        ray->lenghtY = (ray->mapY + 1.0 - camera->posY) * ray->nextTileY;
-    }
+	{
+		ray->towardY = 1;
+		ray->lengthY = (ray->mapY + 1.0 - camera->posY) * ray->nextTileY;
+	}
 }
 
-void performDDA(t_ray *ray, t_data* map)
+void	performDDA(t_ray *ray, t_data* map)
 {
-	//perform DDA
     while (ray->hit == 0 )
     {
-		
-        //jump to next map square, either in x-direction, or in y-direction
-    	if (ray->lenghtX < ray->lenghtY)
+    	if (ray->lengthX < ray->lengthY)
 		{
-			
-			ray->lenghtX += ray->nextTileX;
+			ray->lengthX += ray->nextTileX;
 			ray->mapX += ray->towardX;
 			ray->side = 0;
         }
         else
         {
-			ray->lenghtY += ray->nextTileY;
-			//"111111111111111111111111"
-		//	printf("ray->mapY %d, ray->mapX %d, toardY %f, both %f\n", ray->mapY, ray->mapX, ray->towardY, ray->mapY + ray->towardY);
+			ray->lengthY += ray->nextTileY;
         	ray->mapY += ray->towardY;
           	ray->side = 1;
         }
-	
-        //Check if ray has hit a wall
         if (map->map[ray->mapY][ray->mapX] == '1')
 			ray->hit = 1;
     }
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->lenghtX - ray->nextTileX);
+		ray->perpWallDist = (ray->lengthX - ray->nextTileX);
     else
-		ray->perpWallDist = (ray->lenghtY - ray->nextTileY);
+		ray->perpWallDist = (ray->lengthY - ray->nextTileY);
 }
 
-void calculate_drawing(t_draw *line_to_draw, t_ray *ray, double height)
+
+void	get_wall_info(t_ray *ray, t_game *info)
 {
-	
-	line_to_draw->lineHeight = (int)(height / ray->perpWallDist);
-	line_to_draw->drawStart = (-line_to_draw->lineHeight) / 2 + height / 2;
-	line_to_draw->drawEnd = line_to_draw->lineHeight / 2 + height / 2;
-	if (line_to_draw->drawStart < 0)
-		line_to_draw->drawStart = 0;
-	if (line_to_draw->drawEnd >= height)
-		line_to_draw->drawEnd = height - 1;
-	line_to_draw->side = ray->side;
-	line_to_draw->mapX = ray->mapX;
-	line_to_draw->mapY = ray->mapY;
+	t_camera	*camera;
+
+	camera = &info->camera;
+	ray->lineHeight = (int)(HEIGHT / ray->perpWallDist);
+	ray->drawStart = (-ray->lineHeight) / 2 + HEIGHT / 2;
+	ray->drawEnd = ray->lineHeight / 2 + HEIGHT / 2;
+	if (ray->drawStart < 0)
+		ray->drawStart = 0;
+	if (ray->drawEnd >= HEIGHT)
+		ray->drawEnd = HEIGHT - 1;
+    if (ray->side == 0)
+	  	ray->wallX = camera->posY + ray->perpWallDist * ray->directionY;
+    else
+		ray->wallX = camera->posX + ray->perpWallDist * ray->directionX;
+    ray->wallX -= floor(ray->wallX);
+	ray->texX = (int)(ray->wallX * (double)TEXWIDTH);
+    if (ray->side == 0 && ray->directionX > 0)
+		ray->texX = TEXWIDTH - ray->texX - 1;
+    if (ray->side == 1 && ray->directionY < 0)
+		ray->texX = TEXWIDTH - ray->texX - 1;
+}
+
+void calculate_texture(t_game *info, t_ray *ray, int x)
+{
+	int texY;
+	int color;
+	int y;
+
+	y = 0;
+	double step = 1.0 * TEXHEIGHT / ray->lineHeight;
+	ray->texPos = (ray->drawStart - HEIGHT / 2 + ray->lineHeight / 2) * step;
+	while (y < HEIGHT)
+	{
+		if (y < ray->drawStart)
+		{
+			color = 0x00ff00;
+		}
+		else if (y >= ray->drawStart &&  y < ray->drawEnd)
+		{
+			texY = (int)ray->texPos;// & (TEXHEIGHT - 1); // murY * heightTexture / heightWall
+			ray->texPos += step;
+			color = info->texture[0][texY * TEXWIDTH + ray->texX];
+			if (ray->side == 1)
+				color = (color >> 1) & 8355711;
+		}
+		else
+		{
+			color = 0x00ffff;
+		}
+		info->buffer[y * WIDTH + x] = color;
+		y++;
+	}
 }

@@ -1,8 +1,7 @@
 #ifndef RAYCASTING_H
 #define RAYCASTING_H
-#include "game/struct.h"
-#include "parsing/parsing.h"
-#include "game/camera.h"
+#include "game/game.h"
+#include <math.h>
 enum
 {
 	NORTH = 0,
@@ -11,17 +10,15 @@ enum
 	EAST = 3
 };
 
-// The ray is composed of:
-//	- a lenght
-//	- a distance until the next tile
+
 typedef struct s_ray
 {
 
 	int		mapX;		//mapX
 	int		mapY;		//mapY
 
-	double	lenghtX;		//sideDistX
-	double	lenghtY;		//sideDistY
+	double	lengthX;		//sideDistX
+	double	lengthY;		//sideDistY
 
 	double	nextTileX;	//deltaDistX	
 	double	nextTileY;	//deltaDistX	
@@ -37,12 +34,23 @@ typedef struct s_ray
 	double	perpWallDist;		//perpWallDist
 	int		side; 			//side
 
+	int lineHeight;
+	int drawStart;
+    int drawEnd;
+
+	double wallX;
+	int texX;
+	double step;
+	double texPos;
+
 }t_ray;
 
-void calculate_drawing(t_draw *line_to_draw, t_ray *ray, double height);
+void calculate_screen(t_game *info);
+int *init_buffer(void);
+void calculate_wall(t_ray *ray, t_game *info, int x);
+void init_ray(t_ray *ray, t_game* info, double x);
+void length_ray(t_ray *ray, t_game *info);
 void performDDA(t_ray *ray, t_data* map);
-void initialize_ray3(t_ray *ray, double width, double x, double y, t_camera *camera);
-void initialize_ray2(t_ray *ray, double width, double x, double y, t_camera *camera);
-void initialize_ray(t_ray *ray, double width, double x, double y, t_camera *camera);
-
+void get_wall_info(t_ray *ray, t_game *info);
+void calculate_texture(t_game *info, t_ray *ray, int x);
 #endif

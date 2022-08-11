@@ -5,6 +5,6 @@
 
 // start the game
 void	parsing(t_data *data, t_tex *tex, char *map);
-void	game_start(t_data *data, t_tex *tex);
+void	game_start(t_data *map, t_tex *tex);
 
 #endif

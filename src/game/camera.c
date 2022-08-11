@@ -31,6 +31,6 @@ void vector_player_direction(t_camera *camera)
 // perpendicular to the direction of the player.
 void vector_camera_screen(t_camera *camera)
 {
-	camera->virtualScreenX = 0;
-	camera->virtualScreenY = 0.66;
+	camera->screenX = 0;
+	camera->screenY = 0.66;
 }

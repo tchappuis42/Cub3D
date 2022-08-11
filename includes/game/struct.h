@@ -97,7 +97,7 @@ enum
 typedef struct s_frame
 {
 	void *ptr;	// pointer to manipulate the image
-	char *buff; // tab of the image's pixels
+	int *buff; // tab of the image's pixels
 	int bpp;	// bits per pixel
 	int line;	// number of bits in a line
 	int argb;	// argb or bgra
@@ -110,20 +110,7 @@ typedef struct s_mlx // écran
 {
 	void *ptr; // -> pointeur sur la mlx
 	void *win; // pointeur sur la window
-	t_frame	*frame_ptr;
+	t_frame	*frame;
 } t_mlx;
-
-typedef struct s_draw
-{
-	int lineHeight;
-	int drawStart;
-    int drawEnd;
-	int side;
-	int mapX;
-	int mapY;
-}t_draw;
-
-
-
 
 #endif

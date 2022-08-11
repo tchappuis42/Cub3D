@@ -24,19 +24,11 @@ SRC 	:=	main.c\
 			parsing/parsing_map.c\
 			parsing/chek_info.c\
 			parsing/color.c\
+			parsing/exit_map.c\
 			game/game.c\
 			game/texture.c\
 			game/event/event.c\
 			game/event/movement.c\
-			parsing/exit_map.c\
-			game/mechanics/game.c\
-			game/mechanics/game_info.c\
-			game/mechanics/event/custom.c\
-			game/mechanics/event/keyboard.c\
-			game/mechanics/event/window.c\
-			game/graphics/frame.c\
-			game/graphics/camera.c\
-			game/graphics/visualisator.c\
 			game/graphics/raycasting.c\
 			game/graphics/screen.c\
 			game/camera.c
