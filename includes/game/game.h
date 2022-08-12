@@ -30,6 +30,7 @@ void generate_texture(t_game *info, t_tex *tex);
 void create_texture_image(char *path, t_game *info, int i);
 int	ft_exit(void *param);
 void ft_clean(t_game* info);
+void	minimap(t_mlx *mlx, t_data *map, t_camera *cam);
 
 
 

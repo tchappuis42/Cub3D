@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:37:14 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/11 16:04:08 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/12 19:40:34 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	length_ray(t_ray *ray, t_game *info)
 	}
 	else
 	{
-		ray->towardX = -1;
+		ray->towardX = 1;
 		ray->lengthX = (ray->mapX + 1.0 - camera->posX) * ray->nextTileX;
 	}
 	if (ray->directionY < 0)

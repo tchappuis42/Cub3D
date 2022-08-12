@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:57:07 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/09 17:36:36 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/12 14:50:57 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	get_info_map(char *map, t_data *data)
 	i = data->i - 1;
 	fd = openfd(map);
 	read = get_next_line(fd);
-	data->w = ft_strlen(read) - 1;
+	//data->w = ft_strlen(read) - 1;
 	while (i-- >= 0 || read[0] == '\n')
 	{
 		free(read);

@@ -43,7 +43,8 @@ int main(int argc, char **argv)
 
 	if (argc == 2)
 	{
-		parsing(&data, &tex, argv[1]);	
+		parsing(&data, &tex, argv[1]);
+		printf("h = %d, w = %d\n", data.h, data.w);
 		game_start(&data, &tex);
 	}
 }

@@ -19,6 +19,7 @@ void display_screen(t_game *info)
 	info->mlx.frame = &new_frame;
 	init_new_frame(&new_frame, &info->mlx);
 	creating_frame(&new_frame, info);
+	minimap(&info->mlx, info->map, &info->camera);
 	mlx_destroy_image(info->mlx.ptr, new_frame.ptr);
 }
 
