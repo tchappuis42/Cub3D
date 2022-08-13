@@ -5,61 +5,46 @@
 // execute the movement corresponding to the key
 void player_movement(int keycode, t_game *info)
 {
-	char 		**map;
-	t_camera	*camera;
-
-	map = info->map->map;
-	camera = &info->camera;
 	if (keycode == KEY_W)
-		up_movement(info, info->map->map);
+		up_movement(&info->camera, info->map->map);
 	if (keycode == KEY_S)
-		down_movement(info, info->map->map);
+		down_movement(&info->camera, info->map->map);
 	if (keycode == KEY_D)
-		right_movement(camera, map);
+		right_movement(&info->camera, info->map->map);
 	if (keycode == KEY_A)
-		right_movement(camera, map);
+		left_movement(&info->camera, info->map->map);
 }
 
 // UP MOVEMENT -- key W
 // Move if there's no wall int the front of the player
-void up_movement(t_game *info, char **map)
+void up_movement(t_camera *camera, char **map)
 {
-	t_camera *camera;
-	//char **map;
-	double playerDirectionX;
+	double directionX;
 	double directionY;
 
-	camera = &info->camera;
-	//map = info->map->map;
-	playerDirectionX = camera->playerDirectionX;
+	directionX = camera->playerDirectionX;
 	directionY = camera->playerDirectionY;
 
 	
 	if (map[(int)(camera->posY + directionY)][(int)camera->posX] == '0')
 			camera->posY += directionY;// * movespeed;
-	if (map[(int)camera->posY][(int)(camera->posX + playerDirectionX)] == '0')
-		camera->posX += playerDirectionX;// * movespeed;
+	if (map[(int)camera->posY][(int)(camera->posX + directionX)] == '0')
+		camera->posX += directionX;// * movespeed;
 }
 
 // DOWN MOVEMENT -- key S
 // Move back if there's no wall behind the player
-void down_movement(t_game *info, char **map)
+void down_movement(t_camera *camera, char **map)
 {
-	t_camera *camera;
-	//char **map;
-	double playerDirectionX;
+	double directionX;
 	double directionY;
 
-	camera = &info->camera;
-	//map = info->map->map;
-	playerDirectionX = camera->playerDirectionX;
+	directionX = camera->playerDirectionX;
 	directionY = camera->playerDirectionY;
-
-	
 	if (map[(int)(camera->posY - directionY)][(int)camera->posX] == '0')
 			camera->posY -= directionY;// * movespeed;
-	if (map[(int)camera->posY][(int)(camera->posX - playerDirectionX)] == '0')
-		camera->posX -= playerDirectionX;// * movespeed;
+	if (map[(int)camera->posY][(int)(camera->posX - directionX)] == '0')
+		camera->posX -= directionX;// * movespeed;
 }
 
 // RIGHT MOVEMENT -- key D
@@ -67,13 +52,13 @@ void down_movement(t_game *info, char **map)
 // the player as if he were moving forward
 void right_movement(t_camera *camera, char** map)
 {
-	double playerDirectionX = camera->playerDirectionY;
-	double directionY = -camera->playerDirectionX;
+	double directionX = camera->screenX;
+	double directionY = camera->screenY;
 
 	if (map[(int)(camera->posY + directionY)][(int)camera->posX] == '0')
 			camera->posY += directionY; //* movespeed;
-	if (map[(int)camera->posY][(int)(camera->posX + playerDirectionX)] == '0')
-			camera->posX += directionY; //* movespeed;
+	if (map[(int)camera->posY][(int)(camera->posX + directionX)] == '0')
+			camera->posX += directionX; //* movespeed;
 }
 
 // LEFT MOVEMENT -- key A
@@ -81,11 +66,11 @@ void right_movement(t_camera *camera, char** map)
 // the player as if he were moving forward
 void left_movement(t_camera *camera, char** map)
 {
-	double playerDirectionX = -camera->playerDirectionY;
-	double directionY = camera->playerDirectionX;
+	double directionX = camera->screenX;
+	double directionY = camera->screenY;
 
-	if (map[(int)(camera->posY + directionY)][(int)camera->posX] == '0')
-			camera->posY += directionY; //* movespeed;
-	if (map[(int)camera->posY][(int)(camera->posX + playerDirectionX)] == '0')
-			camera->posX += directionY; //* movespeed;
+	if (map[(int)(camera->posY - directionY)][(int)camera->posX] == '0')
+			camera->posY -= directionY; //* movespeed;
+	if (map[(int)camera->posY][(int)(camera->posX - directionX)] == '0')
+			camera->posX -= directionX; //* movespeed;
 }
