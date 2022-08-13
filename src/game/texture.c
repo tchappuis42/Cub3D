@@ -6,7 +6,7 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 17:19:58 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/13 17:21:40 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/13 19:00:10 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 void	generate_texture(t_game *info, t_tex *tex)
 {
 	info->texture = malloc(sizeof(int *) * 4);
-	create_texture_image(tex->path_no, info, 0);
-	create_texture_image(tex->path_no, info, 1);
-	create_texture_image(tex->path_no, info, 2);
-	create_texture_image(tex->path_no, info, 3);
+	create_texture_image(tex->path_no, info, NORTH);
+	create_texture_image(tex->path_so, info, SOUTH);
+	create_texture_image(tex->path_ea, info, EAST);
+	create_texture_image(tex->path_we, info, WEST);
 }
 
 void	create_texture_image(char *path, t_game *info, int i)
@@ -65,11 +65,11 @@ void	calculate_texture(t_game *info, t_ray *ray, int x)
 	while (y < HEIGHT)
 	{
 		if (y < ray->drawStart)
-			color = CEILING;
+			color = info->map->tex->c;
 		else if (y >= ray->drawStart && y < ray->drawEnd)
 			color = get_wall_color(ray, step, info->texture);
 		else
-			color = FLOOR;
+			color = info->map->tex->f;
 		info->buffer[y * WIDTH + x] = color;
 		y++;
 	}
@@ -82,8 +82,19 @@ int	get_wall_color(t_ray *ray, double step, int **texture)
 
 	texy = (int)ray->texPos;
 	ray->texPos += step;
-	color = texture[0][texy * TEXWIDTH + ray->texX];
-	if (ray->side == 1)
-		color = (color >> 1) & 8355711;
+	if (ray->side == 0)
+	{
+		if (ray->towardX > 0)
+			color = texture[WEST][texy * TEXWIDTH + ray->texX];
+		else
+			color = texture[EAST][texy * TEXWIDTH + ray->texX];
+	}
+	else
+	{
+		if (ray->towardY > 0)
+			color = texture[SOUTH][texy * TEXWIDTH + ray->texX];
+		else
+			color = texture[NORTH][texy * TEXWIDTH + ray->texX];
+	}
 	return (color);
 }
