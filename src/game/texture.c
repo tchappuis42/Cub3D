@@ -1,46 +1,49 @@
-#include "game/game.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/13 17:19:58 by tweimer           #+#    #+#             */
+/*   Updated: 2022/08/13 17:21:40 by tweimer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "game/screen.h"
 #include "../../mlx/mlx.h"
-int *newtexture(void)
+
+void	generate_texture(t_game *info, t_tex *tex)
 {
-	int		y;
-	int		x;
-	int		*texture;
-
-	y = 0;
-	x = 0;
-	texture = malloc(sizeof(int) * (TEXHEIGHT * TEXWIDTH));
-	while (y < TEXHEIGHT)
-	{
-		x = 0;
-		while(x < TEXWIDTH)
-		{
-			texture[y * TEXWIDTH + x] = 0;
-			x++;
-		}
-		y++;
-	}
-	return (texture);
-}
-
-void generate_texture(t_game *info, t_tex *tex)
-{
-
-	printf("YOLO: %s\n", tex->path_no);
-	info->texture = malloc(sizeof(int *) * 4);	
+	info->texture = malloc(sizeof(int *) * 4);
 	create_texture_image(tex->path_no, info, 0);
-	// texture[1] = create_texture_image(tex->so, mlx_ptr);
-	// texture[2] = create_texture_image(tex->we, mlx_ptr);
-	// texture[3] = create_texture_image(tex->ea, mlx_ptr);
+	create_texture_image(tex->path_no, info, 1);
+	create_texture_image(tex->path_no, info, 2);
+	create_texture_image(tex->path_no, info, 3);
 }
 
-void copy_texture(int *src, int *dst)
+void	create_texture_image(char *path, t_game *info, int i)
 {
-	int x = 0;
-	int y = 0;
+	t_frame	tex;
+
+	info->texture[i] = new_texture();
+	tex.ptr = file_to_image(info->mlx.ptr, &tex, path);
+	tex.buff = get_addr(tex.ptr, &tex.bpp, &tex.line, &tex.argb);
+	get_texture(tex.buff, info->texture[i]);
+	destroy_frame(&info->mlx, &tex);
+}
+
+void	get_texture(int *src, int *dst)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
 	while (y < TEXHEIGHT)
 	{
 		x = 0;
-		while(x < TEXWIDTH)
+		while (x < TEXWIDTH)
 		{
 			dst[(y * TEXWIDTH) + x] = src[(y * TEXWIDTH) + x];
 			x++;
@@ -49,14 +52,38 @@ void copy_texture(int *src, int *dst)
 	}
 }
 
-void create_texture_image(char *path, t_game *info, int i)
+// & (TEXHEIGHT - 1); // murY * heightTexture / heightWall
+void	calculate_texture(t_game *info, t_ray *ray, int x)
 {
-	t_frame new_texture;
+	int		y;
+	int		color;
+	double	step;
 
-	(void)path;
-	info->texture[i] = newtexture();
-	new_texture.ptr  =  mlx_xpm_file_to_image(info->mlx.ptr, "./assets/grass2.xpm", &new_texture.width, &new_texture.height);
-	new_texture.buff = (int*)mlx_get_data_addr(new_texture.ptr, &new_texture.bpp, &new_texture.line, &new_texture.argb);
-	copy_texture(new_texture.buff, info->texture[i]);
-	mlx_destroy_image(info->mlx.ptr, new_texture.ptr);
+	y = 0;
+	step = 1.0 * TEXHEIGHT / ray->lineHeight;
+	ray->texPos = (ray->drawStart - HEIGHT / 2 + ray->lineHeight / 2) * step;
+	while (y < HEIGHT)
+	{
+		if (y < ray->drawStart)
+			color = CEILING;
+		else if (y >= ray->drawStart && y < ray->drawEnd)
+			color = get_wall_color(ray, step, info->texture);
+		else
+			color = FLOOR;
+		info->buffer[y * WIDTH + x] = color;
+		y++;
+	}
+}
+
+int	get_wall_color(t_ray *ray, double step, int **texture)
+{
+	int	color;
+	int	texy;
+
+	texy = (int)ray->texPos;
+	ray->texPos += step;
+	color = texture[0][texy * TEXWIDTH + ray->texX];
+	if (ray->side == 1)
+		color = (color >> 1) & 8355711;
+	return (color);
 }

@@ -3,52 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:37:14 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/12 19:40:34 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/13 15:03:56 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/raycasting.h"
 #include "../../../mlx/mlx.h"
 
-void	calculate_screen(t_game *info)
-{
-	int		x;
-	t_ray	ray;
-
-	x = 0;
-	info->buffer = init_buffer();
-	while (x < WIDTH)
-	{
-		calculate_wall(&ray, info, x);
-		calculate_texture(info, &ray, x);
-		x++;
-	}
-}
-
-int	*init_buffer(void)
-{
-	int		i;
-	int		*buffer;
-
-	i = 0;
-	buffer = malloc(sizeof(int *) * HEIGHT * WIDTH);
-	while (i < HEIGHT * WIDTH)
-	{
-		
-		buffer[i] = 0;
-		i++;
-	}
-	return (buffer);
-}
-
 void	calculate_wall(t_ray *ray, t_game *info, int x)
 {
 	init_ray(ray, info, x);
 	length_ray(ray, info);
-	performDDA(ray, info->map);
+	find_wall(ray, info->map);
 	get_wall_info(ray, info);
 }
 
@@ -102,31 +71,30 @@ void	length_ray(t_ray *ray, t_game *info)
 	}
 }
 
-void	performDDA(t_ray *ray, t_data* map)
+void	find_wall(t_ray *ray, t_data *map)
 {
-    while (ray->hit == 0 )
-    {
-    	if (ray->lengthX < ray->lengthY)
+	while (ray->hit == 0)
+	{
+		if (ray->lengthX < ray->lengthY)
 		{
 			ray->lengthX += ray->nextTileX;
 			ray->mapX += ray->towardX;
 			ray->side = 0;
-        }
-        else
-        {
+		}
+		else
+		{
 			ray->lengthY += ray->nextTileY;
-        	ray->mapY += ray->towardY;
-          	ray->side = 1;
-        }
-        if (map->map[ray->mapY][ray->mapX] == '1')
+			ray->mapY += ray->towardY;
+			ray->side = 1;
+		}
+		if (map->map[ray->mapY][ray->mapX] == '1')
 			ray->hit = 1;
-    }
+	}
 	if (ray->side == 0)
 		ray->perpWallDist = (ray->lengthX - ray->nextTileX);
-    else
+	else
 		ray->perpWallDist = (ray->lengthY - ray->nextTileY);
 }
-
 
 void	get_wall_info(t_ray *ray, t_game *info)
 {
@@ -140,46 +108,14 @@ void	get_wall_info(t_ray *ray, t_game *info)
 		ray->drawStart = 0;
 	if (ray->drawEnd >= HEIGHT)
 		ray->drawEnd = HEIGHT - 1;
-    if (ray->side == 0)
-	  	ray->wallX = camera->posY + ray->perpWallDist * ray->directionY;
-    else
+	if (ray->side == 0)
+		ray->wallX = camera->posY + ray->perpWallDist * ray->directionY;
+	else
 		ray->wallX = camera->posX + ray->perpWallDist * ray->directionX;
-    ray->wallX -= floor(ray->wallX);
+	ray->wallX -= floor(ray->wallX);
 	ray->texX = (int)(ray->wallX * (double)TEXWIDTH);
-    if (ray->side == 0 && ray->directionX > 0)
+	if (ray->side == 0 && ray->directionX > 0)
 		ray->texX = TEXWIDTH - ray->texX - 1;
-    if (ray->side == 1 && ray->directionY < 0)
+	if (ray->side == 1 && ray->directionY < 0)
 		ray->texX = TEXWIDTH - ray->texX - 1;
-}
-
-void calculate_texture(t_game *info, t_ray *ray, int x)
-{
-	int texY;
-	int color;
-	int y;
-
-	y = 0;
-	double step = 1.0 * TEXHEIGHT / ray->lineHeight;
-	ray->texPos = (ray->drawStart - HEIGHT / 2 + ray->lineHeight / 2) * step;
-	while (y < HEIGHT)
-	{
-		if (y < ray->drawStart)
-		{
-			color = 0x00ff00;
-		}
-		else if (y >= ray->drawStart &&  y < ray->drawEnd)
-		{
-			texY = (int)ray->texPos;// & (TEXHEIGHT - 1); // murY * heightTexture / heightWall
-			ray->texPos += step;
-			color = info->texture[0][texY * TEXWIDTH + ray->texX];
-			if (ray->side == 1)
-				color = (color >> 1) & 8355711;
-		}
-		else
-		{
-			color = 0x00ffff;
-		}
-		info->buffer[y * WIDTH + x] = color;
-		y++;
-	}
 }
