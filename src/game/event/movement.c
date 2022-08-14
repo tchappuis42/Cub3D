@@ -1,91 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movement.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/13 14:29:12 by tweimer           #+#    #+#             */
+/*   Updated: 2022/08/13 14:47:40 by tweimer          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "game/event.h"
 #include "../../../mlx/mlx.h"
 
 // execute the movement corresponding to the key
-void player_movement(int keycode, t_game *info)
+void	player_movement(int keycode, t_game *info)
 {
-	char 		**map;
-	t_camera	*camera;
-
-	map = info->map->map;
-	camera = &info->camera;
 	if (keycode == KEY_W)
-		up_movement(info, info->map->map);
+		up_movement(&info->camera, info->map->map);
 	if (keycode == KEY_S)
-		down_movement(info, info->map->map);
+		down_movement(&info->camera, info->map->map);
 	if (keycode == KEY_D)
-		right_movement(camera, map);
+		right_movement(&info->camera, info->map->map);
 	if (keycode == KEY_A)
-		right_movement(camera, map);
+		left_movement(&info->camera, info->map->map);
 }
 
 // UP MOVEMENT -- key W
 // Move if there's no wall int the front of the player
-void up_movement(t_game *info, char **map)
+void	up_movement(t_camera *camera, char **map)
 {
-	t_camera *camera;
-	//char **map;
-	double playerDirectionX;
-	double directionY;
+	double	directionx;
+	double	directiony;
 
-	camera = &info->camera;
-	//map = info->map->map;
-	playerDirectionX = camera->playerDirectionX;
-	directionY = camera->playerDirectionY;
-
-	
-	if (map[(int)(camera->posY + directionY)][(int)camera->posX] == '0')
-			camera->posY += directionY;// * movespeed;
-	if (map[(int)camera->posY][(int)(camera->posX + playerDirectionX)] == '0')
-		camera->posX += playerDirectionX;// * movespeed;
+	directionx = camera->playerDirectionX;
+	directiony = camera->playerDirectionY;
+	if (map[(int)(camera->posY + directiony)][(int)camera->posX] == '0')
+			camera->posY += directiony;
+	if (map[(int)camera->posY][(int)(camera->posX + directionx)] == '0')
+		camera->posX += directionx;
 }
 
 // DOWN MOVEMENT -- key S
 // Move back if there's no wall behind the player
-void down_movement(t_game *info, char **map)
+void	down_movement(t_camera *camera, char **map)
 {
-	t_camera *camera;
-	//char **map;
-	double playerDirectionX;
-	double directionY;
+	double	directionx;
+	double	directiony;
 
-	camera = &info->camera;
-	//map = info->map->map;
-	playerDirectionX = camera->playerDirectionX;
-	directionY = camera->playerDirectionY;
-
-	
-	if (map[(int)(camera->posY - directionY)][(int)camera->posX] == '0')
-			camera->posY -= directionY;// * movespeed;
-	if (map[(int)camera->posY][(int)(camera->posX - playerDirectionX)] == '0')
-		camera->posX -= playerDirectionX;// * movespeed;
+	directionx = camera->playerDirectionX;
+	directiony = camera->playerDirectionY;
+	if (map[(int)(camera->posY - directiony)][(int)camera->posX] == '0')
+			camera->posY -= directiony;
+	if (map[(int)camera->posY][(int)(camera->posX - directionx)] == '0')
+		camera->posX -= directionx;
 }
 
 // RIGHT MOVEMENT -- key D
 // Rotate the playerDirection's vector by 90 degrees and move
 // the player as if he were moving forward
-void right_movement(t_camera *camera, char** map)
+void	right_movement(t_camera *camera, char **map)
 {
-	double playerDirectionX = camera->playerDirectionY;
-	double directionY = -camera->playerDirectionX;
+	double	directionx;
+	double	directiony;
 
-	if (map[(int)(camera->posY + directionY)][(int)camera->posX] == '0')
-			camera->posY += directionY; //* movespeed;
-	if (map[(int)camera->posY][(int)(camera->posX + playerDirectionX)] == '0')
-			camera->posX += directionY; //* movespeed;
+	directionx = camera->screenX;
+	directiony = camera->screenY;
+	if (map[(int)(camera->posY + directiony)][(int)camera->posX] == '0')
+			camera->posY += directiony;
+	if (map[(int)camera->posY][(int)(camera->posX + directionx)] == '0')
+			camera->posX += directionx;
 }
 
 // LEFT MOVEMENT -- key A
 // Rotate the playerDirection's vector by -90 degrees and move
 // the player as if he were moving forward
-void left_movement(t_camera *camera, char** map)
+void	left_movement(t_camera *camera, char **map)
 {
-	double playerDirectionX = -camera->playerDirectionY;
-	double directionY = camera->playerDirectionX;
+	double	directionx;
+	double	directiony;
 
-	if (map[(int)(camera->posY + directionY)][(int)camera->posX] == '0')
-			camera->posY += directionY; //* movespeed;
-	if (map[(int)camera->posY][(int)(camera->posX + playerDirectionX)] == '0')
-			camera->posX += directionY; //* movespeed;
+	directionx = camera->screenX;
+	directiony = camera->screenY;
+	if (map[(int)(camera->posY - directiony)][(int)camera->posX] == '0')
+			camera->posY -= directiony;
+	if (map[(int)camera->posY][(int)(camera->posX - directionx)] == '0')
+			camera->posX -= directionx;
 }

@@ -7,7 +7,7 @@ RESET	= \033[0m
 
 NAME 	:= Cub3d
 CC 		:= gcc
-CFLAGS	= -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_INC) -I $(MLX_INC) #-g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_INC) -I $(MLX_INC) -g3 -fsanitize=address
 
 SRC_DIR := ./src/
 OBJ_DIR	:= ./obj/
@@ -31,7 +31,11 @@ SRC 	:=	main.c\
 			game/event/movement.c\
 			game/graphics/raycasting.c\
 			game/graphics/screen.c\
-			game/camera.c
+			game/camera.c\
+			game/utils.c\
+			game/graphics/frame.c\
+			game/minimap.c\
+			game/clean.c
 
 
 SRCS 	:= $(addprefix  $(SRC_DIR), $(SRC))

@@ -45,12 +45,13 @@ typedef struct s_ray
 
 }t_ray;
 
-void calculate_screen(t_game *info);
-int *init_buffer(void);
+
+int *init_buffer();
 void calculate_wall(t_ray *ray, t_game *info, int x);
 void init_ray(t_ray *ray, t_game* info, double x);
 void length_ray(t_ray *ray, t_game *info);
-void performDDA(t_ray *ray, t_data* map);
+void find_wall(t_ray *ray, t_data* map);
 void get_wall_info(t_ray *ray, t_game *info);
 void calculate_texture(t_game *info, t_ray *ray, int x);
+int get_wall_color(t_ray *ray, double step, int **texture);
 #endif

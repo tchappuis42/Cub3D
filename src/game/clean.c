@@ -1,47 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   screen.c                                           :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/13 15:05:04 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/13 17:33:30 by tweimer          ###   ########.fr       */
+/*   Created: 2022/08/13 17:43:48 by tweimer           #+#    #+#             */
+/*   Updated: 2022/08/13 17:44:45 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game/screen.h"
-#include "../../../mlx/mlx.h"
+#include "game/game.h"
 
-int	generate_screen(void *param)
+int	ft_exit(void *param)
 {
 	t_game	*info;
 
 	info = (t_game *)param;
-	calculate_screen(info);
-	display_screen(info);
+	ft_clean(info);
+	exit(EXIT_SUCCESS);
 	return (0);
 }
 
-void	calculate_screen(t_game *info)
+void	ft_clean(t_game *info)
 {
-	int		x;
-	t_ray	ray;
-
-	x = 0;
-	while (x < WIDTH)
-	{
-		calculate_wall(&ray, info, x);
-		calculate_texture(info, &ray, x);
-		x++;
-	}
+	free_buffer(info);
+	free_texture(info);
 }
 
-void	display_screen(t_game *info)
+void	free_buffer(t_game *info)
 {
-	t_frame	new_frame;
+	free(info->buffer);
+	info->buffer = NULL;
+}
 
-	info->mlx.frame = &new_frame;
-	create_frame(&new_frame, info);
-	destroy_frame(&info->mlx, &new_frame);
+void	free_texture(t_game *info)
+{
+	int	i;
+
+	i = 0;
+	while (i < 4)
+	{
+		free(info->texture[i]);
+		info->texture[i] = NULL;
+		i++;
+	}
+	free(info->texture);
+	info->texture = NULL;
 }

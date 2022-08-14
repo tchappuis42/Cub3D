@@ -5,10 +5,14 @@
 #include "game/camera.h"
 #include "parsing/parsing.h"
 
-#define TEXWIDTH 100
-#define TEXHEIGHT 100
+#define TEXWIDTH 736
+#define TEXHEIGHT 736
 #define WIDTH 1000
 #define HEIGHT 1000
+
+#define YELLOW 0XF2FF00
+#define CEILING 0x00ff00
+#define FLOOR 0x00ffff
 
 typedef struct s_game
 {
@@ -31,6 +35,10 @@ void create_texture_image(char *path, t_game *info, int i);
 int	ft_exit(void *param);
 void ft_clean(t_game* info);
 void	minimap(t_mlx *mlx, t_data *map, t_camera *cam);
+int *new_texture(void);
+void get_texture(int *src, int *dst);
+void free_buffer(t_game *info);
+void free_texture(t_game *info);
 
 
 

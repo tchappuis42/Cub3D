@@ -6,7 +6,7 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:31:03 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/11 14:47:06 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/13 17:32:11 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	keypress_event(int keycode, void *param)
 	if (keycode == KEY_ESCAPE)
 		exit_window(info);
 	if (keycode == KEY_RIGHT || keycode == KEY_LEFT)
-		player_rotation(keycode, info);
+		player_rotation(keycode, &info->camera);
 	if (keycode == is_movement(keycode))
 		player_movement(keycode, info);
 	return (0);
@@ -32,7 +32,6 @@ int	keypress_event(int keycode, void *param)
 // before calling the final function before exiting the program
 void	exit_window(t_game *info)
 {
-	mlx_destroy_image(info->mlx.ptr, info->mlx.frame->ptr);
 	mlx_clear_window(info->mlx.ptr, info->mlx.win);
 	mlx_destroy_window(info->mlx.ptr, info->mlx.win);
 	ft_clean(info);
@@ -51,23 +50,21 @@ int	is_movement(int keycode)
 
 // Event of the rotation of the player,rotate the VirtualScreen 
 // and the direction of the player by x degree
-void	player_rotation(int keycode, t_game *info)
+void	player_rotation(int keycode, t_camera *camera)
 {
 	if (keycode == KEY_RIGHT)
-		rotation(info, -0.5);
+		rotation(camera, -0.5);
 	else if (keycode == KEY_LEFT)
-		rotation(info, 0.5);
+		rotation(camera, 0.5);
 }
 
 // Rotate the virtualScreen and the player's direction
 // See the rotation matrix to understand the modification of the two vector
-void	rotation(t_game *info, double angle)
+void	rotation(t_camera *camera, double angle)
 {
 	double		vectorx;
 	double		vectory;
-	t_camera	*camera;
 
-	camera = &info->camera;
 	vectorx = camera->playerDirectionX;
 	vectory = camera->playerDirectionY;
 	camera->playerDirectionX = vectorx * cos(angle) - vectory * sin(angle);
