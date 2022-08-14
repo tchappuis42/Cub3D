@@ -2,13 +2,6 @@
 #define RAYCASTING_H
 #include "game/game.h"
 #include <math.h>
-enum
-{
-	NORTH = 0,
-	WEST = 1,
-	SUD = 2,
-	EAST = 3
-};
 
 
 typedef struct s_ray
