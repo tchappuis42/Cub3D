@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 11:32:36 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/05 10:38:44 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/15 17:26:23 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char	*get_next_line(int fd)
 	static char	*t;
 
 	res = NULL;
-	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, res, 0) < 0 )
+	if (fd < 0 || BUFFER_SIZE < 1 || read(fd, res, 0) < 0)
 		return (NULL);
 	if (!t && read(fd, res, BUFFER_SIZE) == 0)
 		return (NULL);

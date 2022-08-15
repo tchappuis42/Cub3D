@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 12:20:09 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/08 14:40:29 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:25:29 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,6 +120,6 @@ char	*get_next_line(int fd);
 
 char	*ft_printstr(char *buffer, char *rtn);
 
-int	ft_strcmp(const char *s1, const char *s2);
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif
