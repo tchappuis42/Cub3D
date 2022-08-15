@@ -14,10 +14,10 @@ typedef struct s_camera
 
 }t_camera;
 
-void init_camera(t_camera *camera, double x, double y);
+void	init_camera(t_camera *camera, double x, double y, char view);
 void vector_player_position(t_camera *camera, double x, double y);
-void vector_player_direction(t_camera *camera);
-void vector_camera_screen(t_camera *camera);
+void	vector_player_direction(t_camera *camera, double dirx, double diry);
+void	vector_camera_screen(t_camera *camera,double valx, double valy);
 
 
 #endif
