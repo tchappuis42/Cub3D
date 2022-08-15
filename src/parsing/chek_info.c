@@ -6,7 +6,7 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:25:21 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/11 16:25:24 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/15 15:55:18 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ static void	forbiden_char(t_data *data, int y, int w)
 			if (data->map[y][i] == 'N' || data->map[y][i] == 'S'
 				|| data->map[y][i] == 'E' || data->map[y][i] == 'W')
 			{
-				data->map[y][i] = '0';
 				if (data->p != 0)
 					exit_map(4, data);
 				data->px = i;
 				data->py = y;
 				data->p = data->map[y][i];
+				data->map[y][i] = '0';
 			}
 			else
 				exit_map(3, data);
