@@ -6,7 +6,7 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 16:50:24 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/13 17:43:09 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/15 15:57:39 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_info(t_game *info, t_data *map, t_tex *tex)
 	info->buffer = init_buffer();
 	info->mlx.ptr = mlx_init();
 	info->mlx.win = mlx_new_window(info->mlx.ptr, WIDTH, HEIGHT, "Cub3d");
-	init_camera(&info->camera, map->px, map->py);
+	init_camera(&info->camera, map->px, map->py, map->p);
 	generate_texture(info, tex);
 }
 
