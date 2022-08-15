@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 17:43:48 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/13 17:44:45 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/15 16:39:43 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_clean(t_game *info)
 {
 	free_buffer(info);
 	free_texture(info);
+	free_parsing(info->map);
 }
 
 void	free_buffer(t_game *info)
@@ -47,4 +48,18 @@ void	free_texture(t_game *info)
 	}
 	free(info->texture);
 	info->texture = NULL;
+}
+
+void	free_parsing(t_data *data)
+{
+	if (data->map != NULL)
+		ft_tabfree(data->map);
+	if (data->tex->path_so != NULL)
+		free(data->tex->path_so);
+	if (data->tex->path_no != NULL)
+		free(data->tex->path_no);
+	if (data->tex->path_we != NULL)
+		free(data->tex->path_we);
+	if (data->tex->path_ea != NULL)
+		free(data->tex->path_ea);
 }

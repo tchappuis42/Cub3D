@@ -45,7 +45,7 @@ int *new_texture(void);
 void get_texture(int *src, int *dst);
 void free_buffer(t_game *info);
 void free_texture(t_game *info);
-
+void	free_parsing(t_data *data);
 
 
 #endif
