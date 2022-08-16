@@ -6,14 +6,14 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 10:15:08 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 11:41:50 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/16 13:12:23 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing/parsing.h"
 #include "../../includes/cub3d.h"
 
-char *expected_line(void)
+char	*expected_line(void)
 {
 	char	*width;
 	char	*height;
@@ -32,7 +32,7 @@ char *expected_line(void)
 	return (rtn);
 }
 
-void free_line(char *line)
+void	free_line(char *line)
 {
 	if (line != NULL)
 	{
@@ -41,9 +41,9 @@ void free_line(char *line)
 	}
 }
 
-int check_tex_size(int tmp_fd, char *expected)
+int	check_tex_size(int tmp_fd, char *expected)
 {
-	char *line;
+	char	*line;
 
 	line = NULL;
 	while (ft_strcmp(LINE_BEFORE_TEX_SIZE, line) != 0)
@@ -61,9 +61,9 @@ int check_tex_size(int tmp_fd, char *expected)
 	return (1);
 }
 
-int check_file(const char *filename, char *expected)
+int	check_file(const char *filename, char *expected)
 {
-	int 	tmp_fd;
+	int	tmp_fd;
 
 	tmp_fd = open(filename, O_RDONLY);
 	if (tmp_fd < 0)
@@ -76,42 +76,18 @@ int check_file(const char *filename, char *expected)
 	return (1);
 }
 
-int checking_files(t_tex *tex)
+void	parsing_texture(t_data *data)
 {
-	char *expected;
+	char	*expected;
 
 	expected = expected_line();
-	if (!check_file(tex->path_no, expected))
+	if (!check_file(data->tex->path_no, expected)
+		|| !check_file(data->tex->path_so, expected)
+		|| !check_file(data->tex->path_ea, expected)
+		|| !check_file(data->tex->path_we, expected))
 	{
 		free(expected);
 		expected = NULL;
-		return (0);
-	}
-	if (!check_file(tex->path_so, expected))
-	{
-		free(expected);
-		expected = NULL;
-		return (0);
-	}
-	if (!check_file(tex->path_ea, expected))
-	{
-		free(expected);
-		expected = NULL;
-		return (0);
-	}
-	if (!check_file(tex->path_we, expected))
-	{
-		free(expected);
-		expected = NULL;
-		return (0);
-	}
-	return (1);
-}
-
-void parsing_texture(t_data *data)
-{
-	if (checking_files(data->tex) == 0)
-	{
 		exit_map(8, data);
 	}
 }
