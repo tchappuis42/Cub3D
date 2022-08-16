@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 10:15:08 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 15:35:04 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 16:46:23 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ char	*expected_line(void)
 	free(tmp[0]);
 	free(tmp[1]);
 	free(tmp[2]);
+	free(width);
+	free(height);
 	return (rtn);
 }
 
@@ -92,4 +94,6 @@ void	parsing_texture(t_data *data)
 		expected = NULL;
 		exit_map(8, data);
 	}
+	free(expected);
+	expected = NULL;
 }

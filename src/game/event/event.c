@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:31:03 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 16:07:57 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 16:25:56 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	is_movement(int keycode)
 void	player_rotation(int keycode, t_camera *camera)
 {
 	if (keycode == KEY_RIGHT)
-		rotation(camera, 0.2);
+		rotation(camera, 0.1);
 	else if (keycode == KEY_LEFT)
-		rotation(camera, -0.2);
+		rotation(camera, -0.1);
 }
 
 // Rotate the virtualScreen and the player's direction

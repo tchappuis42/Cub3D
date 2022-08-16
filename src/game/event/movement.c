@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 14:29:12 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 16:04:46 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 16:26:43 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	up_movement(t_camera *camera, char **map)
 	double	directionx;
 	double	directiony;
 
-	directionx = camera->directionx * 0.3;
-	directiony = camera->directiony * 0.3;
+	directionx = camera->directionx * 0.1;
+	directiony = camera->directiony * 0.1;
 	if (map[(int)(camera->posy + directiony)][(int)camera->posx] == '0')
 			camera->posy += directiony;
 	if (map[(int)camera->posy][(int)(camera->posx + directionx)] == '0')
@@ -48,8 +48,8 @@ void	down_movement(t_camera *camera, char **map)
 	double	directionx;
 	double	directiony;
 
-	directionx = camera->directionx * 0.3;
-	directiony = camera->directiony * 0.3;
+	directionx = camera->directionx * 0.1;
+	directiony = camera->directiony * 0.1;
 	if (map[(int)(camera->posy - directiony)][(int)camera->posx] == '0')
 			camera->posy -= directiony;
 	if (map[(int)camera->posy][(int)(camera->posx - directionx)] == '0')
@@ -64,8 +64,8 @@ void	right_movement(t_camera *camera, char **map)
 	double	directionx;
 	double	directiony;
 
-	directionx = camera->screenx * 0.3;
-	directiony = camera->screeny * 0.3;
+	directionx = camera->screenx * 0.1;
+	directiony = camera->screeny * 0.1;
 	if (map[(int)(camera->posy + directiony)][(int)camera->posx] == '0')
 			camera->posy += directiony;
 	if (map[(int)camera->posy][(int)(camera->posx + directionx)] == '0')
@@ -80,8 +80,8 @@ void	left_movement(t_camera *camera, char **map)
 	double	directionx;
 	double	directiony;
 
-	directionx = camera->screenx * 0.3;
-	directiony = camera->screeny * 0.3;
+	directionx = camera->screenx * 0.1;
+	directiony = camera->screeny * 0.1;
 	if (map[(int)(camera->posy - directiony)][(int)camera->posx] == '0')
 			camera->posy -= directiony;
 	if (map[(int)camera->posy][(int)(camera->posx - directionx)] == '0')
