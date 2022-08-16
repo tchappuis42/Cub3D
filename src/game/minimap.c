@@ -3,67 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:11 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/13 17:45:44 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/16 14:55:59 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "game/screen.h"
 #include "../../mlx/mlx.h"
 
-void	draw_rectangle(t_frame *mini, int y, int x, int color, t_data *map)
+void	draw_rectangle(t_frame *mini, int *pos, int color, t_data *map)
 {
-	int i; 
-	int j;
-	int pixel;
+	int	i;
+	int	j;
+	int	pixel;
+	int	h;
+	int	w;
 
-	int	h = ((HEIGHT / 5) / map->h);
-	int w = ((WIDTH / 5) / map->w);
+	h = ((HEIGHT / 5) / map->h);
+	w = ((WIDTH / 5) / map->w);
 	i = 0;
 	while (i < h)
 	{
 		j = 0;
 		while (j < w)
 		{
-			pixel = ((y * h + i + 5) * mini->width) + ((x * w + j + 5));
+			pixel = ((pos[0] * h + i + 5) * mini->width)
+				+ ((pos[1] * w + j + 5));
 			mini->buff[pixel] = color;
 			j++;
 		}
 		i++;
 	}
-	
 }
-void	draw_player(t_frame *mini, int y, int x, int color, t_data *map)
+
+void	draw_player(t_frame *mini, int *pos, int color, t_data *map)
 {
-	int i = 0;
-	int j;
-	int pixel;
+	int	i;
+	int	j;
+	int	pixel;
+	int	h;
+	int	w;
 
-	(void)map;
-	int	h = ((HEIGHT / 5) / map->h);
-	int w = ((WIDTH / 5) / map->w);
-
+	i = 0;
+	h = ((HEIGHT / 5) / map->h);
+	w = ((WIDTH / 5) / map->w);
 	while (i < 5)
 	{
 		j = 0;
 		while (j < 5)
 		{
-			pixel = ((y * h + i + 5) * mini->width) + ((x * w + j + 5));
+			pixel = ((pos[2] * h + i + 5) * mini->width)
+				+ ((pos[3] * w + j + 5));
 			mini->buff[pixel] = color;
 			j++;
 		}
 		i++;
 	}
-	
 }
 
 void	draw_cadre(t_frame *minimap)
 {
 	int	x;
 	int	y;
-	int pixel;
+	int	pixel;
 
 	x = 0;
 	while (x < minimap->width)
@@ -81,93 +85,29 @@ void	draw_cadre(t_frame *minimap)
 
 void	minimap(t_mlx *mlx, t_data *map, t_camera *cam)
 {
-	t_frame minimap;
-	int		y;
-	int		x;
+	t_frame	minimap;
+	int		pos[4];
 
-	y = 0;
+	pos[0] = 0;
+	pos[2] = cam->posY;
+	pos[3] = cam->posX;
 	init_frame(&minimap, mlx, WIDTH / 5 + 10, HEIGHT / 5 + 10);
 	draw_cadre(&minimap);
-	while (y < map->h)
+	while (pos[0] < map->h)
 	{
-		x = 0;
-		while(x < map->w)
+		pos[1] = 0;
+		while (pos[1] < map->w)
 		{
-			if (map->map[y][x] == '1')
-				draw_rectangle(&minimap, y, x, 0x4E4E4E, map);
-			if (map->map[y][x] == '0')
-				draw_rectangle(&minimap, y, x, 0xF0DDC5, map);
-			if (map->map[y][x] == ' ')
-				draw_rectangle(&minimap, y, x, 0x848483, map);
-			x++;
+			if (map->map[pos[0]][pos[1]] == '1')
+				draw_rectangle(&minimap, pos, 0x4E4E4E, map);
+			if (map->map[pos[0]][pos[1]] == '0')
+				draw_rectangle(&minimap, pos, 0xF0DDC5, map);
+			if (map->map[pos[0]][pos[1]] == ' ')
+				draw_rectangle(&minimap, pos, 0x848483, map);
+			pos[1]++;
 		}
-		y++;
+		pos[0]++;
 	}
-	draw_player(&minimap, cam->posY, cam->posX, 0XFF0000, map);
+	draw_player(&minimap, pos, 0XFF0000, map);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, minimap.ptr, 0, 0);
 }
-
-// typedef struct s_mini
-// {
-// 	char	*buff;
-// 	int		bpp;
-// 	int		line_len;
-// 	int		endian;
-// }	s_mini;
-
-// void	draw_rectangle(t_mini *mini, int y, int x, int color, t_data *map)
-// {
-// 	int i = 0;
-// 	int j;
-// 	int pixel;
-
-// 	int	h = ((HEIGHT / 5) / map->h);
-// 	int w = ((WIDTH / 5) / map->w);
-
-// 	while (i < h)
-// 	{
-// 		j = 0;
-// 		while (j < w)
-// 		{
-// 			pixel = ((y * h + i) * mini->line_len) + ((x * w + j) * 4);
-// 			map->buff[pixel + 0] = (color) & 0xFF;
-//         	map->buff[pixel + 1] = (color >> 8) & 0xFF;
-//         	map->buff[pixel + 2] = (color >> 16) & 0xFF;
-//         	map->buff[pixel + 3] = (color >> 24);
-// 			j++;
-// 		}
-// 		i++;
-// 	}
-	
-// }
-
-// void	draw_mini(t_mini *mini, int y, int x, t_data *map)
-// {
-// 	if (map->map[y][x] == 1)
-// 		draw_rectangle(mini, y, x, 0xABCDEF, map);
-// 	if (map->map[y][x] == 0)
-// 		draw_rectangle(mini, y, x, 0xFFFFFF, map);
-// }
-
-// void	minimap(t_mlx *mlx, t_data *map)
-// {
-// 	void	*minimap;
-// 	s_mini	mini;
-// 	int		y;
-// 	int		x;
-
-// 	y = 0;
-// 	minimap = mlx_new_image(mlx->ptr, WIDTH / 5, HEIGHT / 5);
-// 	mini.buff = mlx_get_data_addr(minimap, &mini.bpp, &mini.line_len, &mini.endian);
-// 	while (y < map->h)
-// 	{
-// 		x = 0;
-// 		while(x < map->w)
-// 		{
-// 			draw_mini(&mini, y, x, map);
-// 			x++;
-// 		}
-// 		y++;
-// 	}
-// 	mlx_put_image_to_window(mlx->ptr, mlx->win, minimap, 10, 10);
-// }
