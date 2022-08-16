@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 10:15:08 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 13:12:23 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/16 15:35:04 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ void	free_line(char *line)
 int	check_tex_size(int tmp_fd, char *expected)
 {
 	char	*line;
+	char	*needle;
 
 	line = NULL;
-	while (ft_strcmp(LINE_BEFORE_TEX_SIZE, line) != 0)
+	needle = "/* columns rows colors chars-per-pixel */";
+	while (ft_strcmp(needle, line) != 0)
 	{
 		free_line(line);
 		line = get_next_line(tmp_fd);
