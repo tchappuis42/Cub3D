@@ -57,7 +57,7 @@ MLX_LIB =  -L $(MLX_DIR) -lmlx -framework OpenGL -framework AppKit
 
 all:   $(NAME)
 $(NAME): $(LIBFT) $(MLX) $(OBJ_DIR) $(OBJS)
-	@printf "$(YEL)\n------------Compiling----------------\n$(RESET)"
+	@printf "$(YEL)------------Compiling----------------\n$(RESET)"
 	@printf "$(RESET)$(CC) $(CFLAGS)\n"
 	@$(CC) $(CFLAGS) -I $(MLX_DIR)/mlx.h -o $@ $(OBJS) $(LIBFT) $(MLX_LIB)
 	@printf "$(YEL)------------Linked------------------\n$(RESET)"
@@ -77,16 +77,21 @@ $(MLX):
 	@make -C $(MLX_DIR)
 
 clean:
+	@printf "$(RED)CLEANING: $(RESET)\n$(RESET)"
 	@rm -f $(OBJS)
 	@rm -rf $(OBJ_DIR)
 	@make -C ./$(LIBFT_DIR) clean
 	@make -C ./$(MLX_DIR) clean
-	@printf "\n $(RED)removing: $(RESET) $(OBJ_DIR)\n$(RESET)"
+	@printf "$(RED)removing: $(RESET) $(OBJ_DIR)\n$(RESET)"
 
-fclean: clean
+fclean:
+	@printf "$(RED)CLEANING: $(RESET) \n$(RESET)"
+	@rm -f $(OBJS)
+	@rm -rf $(OBJ_DIR)
 	@make -C ./$(LIBFT_DIR) fclean
+	@make -C ./$(MLX_DIR) clean
 	@rm -f $(NAME)
-	@printf "\n $(RED)removing: $(RESET) $(NAME)\n"
+	@printf "$(RED)$(NAME) removing: $(RESET) $(NAME)\n"
 
 re: fclean all
 .PHONY: re fclean clean all

@@ -107,6 +107,7 @@ $(OBJ_DIR):
 	@ $(foreach listObj, $(SRCS_SUBDIR), $(NEWSUBDIR))
 
 $(TARGET):	$(SRCS) $(Objects)
+	@printf "$(BLU)COMPILATION: $(RESET)\n$(RESET)"
 	@ $(ECHO) "$(GREEN)Libft compiled with success!$(RESET)"
 	@ $(AR) $(TARGET) $(Objects)
 
@@ -116,13 +117,13 @@ addBonus:
 bonus: addBonus all
 
 clean:
-	@ $(ECHO) "\n $(RED)libft removing: $(RESET) $(OBJ_DIR) $(OBJS)\n$(RESET)"
+	@ $(ECHO) "$(RED)libft removing:$(RESET)\n	- objects files$(RESET)"
 	@ rm -rf $(OBJS)
 	@ rm -rf $(BONUS_OBJS)
 	@ rm -rf $(OBJ_DIR)
 
 fclean: clean
-	@ $(ECHO) "\n $(RED)libft removing: $(RESET) $(TARGET)\n"
+	@ $(ECHO) "	- $(TARGET)\n"
 	@ rm -rf $(TARGET)
 
 re: fclean all

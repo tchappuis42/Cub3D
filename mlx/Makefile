@@ -10,15 +10,28 @@ CFLAGS+=-O2
 
 # add to match string put with X11 in size and position
 CFLAGS+= -DSTRINGPUTX11
+CFLAGS+= -w
+
+ECHO	:= echo
+GREEN	:= \033[1;32m
+RED		:= \033[1;31m
+RESET	:= \033[0m
 
 all: $(NOM)
 
+.c.o:
+	@$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
+.m.o:
+	@$(CC) -c $(CFLAGS) $(CPPFLAGS) -o $@ $<
+
 $(NOM):	$(OBJ)
-	ar -r $(NOM) $(OBJ)
-	ranlib $(NOM)
+	@$(ECHO) "$(GREEN)Minilibx compiled with success!$(RESET)"
+	@ar -r -c $(NOM) $(OBJ)
+	@ranlib $(NOM)
 
 clean:
-	rm -f $(NOM) $(OBJ) *~
-	rm -f mlx_app
+	@ $(ECHO) "$(RED)libmlx removing:$(RESET)\n	- objects files\n	- $(NOM)\n$(RESET)"
+	@rm -f $(NOM) $(OBJ) *~
+	@rm -f mlx_app
 
 re: clean all
