@@ -22,6 +22,7 @@ SRC 	:=	main.c\
 			parsing/parsing.c\
 			parsing/parsing_info.c\
 			parsing/parsing_map.c\
+			parsing/parsing_texture.c\
 			parsing/chek_info.c\
 			parsing/color.c\
 			parsing/exit_map.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 15:18:51 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/11 15:19:34 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 11:10:40 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,13 @@ void	exit_map(int type, t_data *data)
 	if (type == 4)
 		printf("Error : trop de player\n");
 	if (type == 5)
-		printf("Error : color");
+		printf("Error : color\n");
 	if (type == 6)
-		printf("Error : ");
+		printf("Error : \n");
 	if (type == 7)
-		printf("Error : Malloc error");
+		printf("Error : Malloc error\n");
+	if (type == 8)
+		printf("Error : texture file\n");
 	if (data->map != NULL)
 		ft_tabfree(data->map);
 	free_tex(data->tex);

@@ -6,7 +6,7 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:28:41 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/11 16:24:58 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/16 11:42:49 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,11 @@
 # include <fcntl.h>
 #include "libft.h"
 
-
-
+#define LINE_BEFORE_TEX_SIZE "/* columns rows colors chars-per-pixel */"
+#define TEXWIDTH 100
+#define TEXHEIGHT 100
+#define WIDTH 1000
+#define HEIGHT 1000
 //lien des fichiers pour les textures
 typedef struct s_texture 
 {
@@ -53,5 +56,6 @@ void	get_info_map(char *map, t_data *data);
 void	chek_info(t_data *data, char *map);
 void	exit_map(int type, t_data *data);
 int		get_color(char *str, t_data *data);
+void parsing_texture(t_data *data);
 
 #endif

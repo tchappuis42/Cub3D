@@ -6,7 +6,7 @@
 /*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:26:24 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/11 16:24:14 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/16 11:17:07 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,5 @@ void	parsing(t_data *data, t_tex *tex, char *map)
 	get_info_map(map, data);
 	parsing_map(data, map);
 	chek_info(data, map);
+	parsing_texture(data);
 }

@@ -5,11 +5,6 @@
 #include "game/camera.h"
 #include "parsing/parsing.h"
 
-#define TEXWIDTH 100
-#define TEXHEIGHT 100
-#define WIDTH 1000
-#define HEIGHT 1000
-
 #define YELLOW 0XF2FF00
 #define CEILING 0x00ff00
 #define FLOOR 0x00ffff
