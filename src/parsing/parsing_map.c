@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:57:07 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/13 17:45:11 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/16 17:04:51 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,4 +93,5 @@ void	parsing_map(t_data *data, char *map)
 		read = get_next_line(fd);
 	}
 	free(read);
+	close(fd);
 }
