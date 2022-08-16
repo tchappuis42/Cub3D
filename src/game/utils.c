@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 17:22:17 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/15 17:02:57 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:03:21 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	*init_buffer(void)
 	int		*buffer;
 
 	i = 0;
-	buffer = malloc(sizeof(int *) * HEIGHT * WIDTH);
+	buffer = malloc(sizeof(int ) * HEIGHT * WIDTH);
 	while (i < HEIGHT * WIDTH)
 	{
 		buffer[i] = 0;
@@ -54,9 +54,4 @@ void	copy_buffer_to_frame(t_frame *frame, int *buffer)
 		buffer[i] = 0;
 		i++;
 	}
-}
-
-void	*file_to_image(t_mlx *mlx, t_frame *tex, char *path)
-{
-	return (mlx_xpm_file_to_image(mlx->ptr, path, &tex->width, &tex->height));
 }

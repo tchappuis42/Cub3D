@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 17:19:58 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 16:03:49 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:06:12 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	create_texture_image(char *path, t_game *info, int i)
 	t_frame	tex;
 
 	info->texture[i] = new_texture();
-	tex.ptr = file_to_image(info->mlx.ptr, &tex, path);
+	tex.ptr = NULL;
+	tex.ptr = mlx_xpm_file_to_image(info->mlx.ptr, path,
+			&tex.width, &tex.height);
 	if (tex.ptr == NULL)
 	{
 		ft_clean(info);

@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:35:17 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/16 16:51:46 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:05:49 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	ft_rgb(int r, int g, int b)
 	return (color);
 }
 
-void clean_color(char **tab, t_data *data, int exit)
+void	clean_color(char **tab, t_data *data, int exit)
 {
 	ft_tabfree(tab);
 	if (exit == 1)

@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 16:50:24 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 16:42:07 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 18:07:09 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	game_start(t_data *map, t_tex *tex)
 void	init_info(t_game *info, t_data *map, t_tex *tex)
 {
 	info->map = map;
-	info->mlx.ptr = NULL;
 	info->buffer = init_buffer();
 	info->mlx.ptr = mlx_init();
 	info->mlx.win = mlx_new_window(info->mlx.ptr, WIDTH, HEIGHT, "Cub3d");
@@ -47,7 +46,6 @@ void	main_loop(t_game *info)
 // and closure of the window
 void	game_event(t_game *info)
 {
-	// mlx_key_hook(info->mlx.win, keypress_event, info);
-	mlx_hook(info->mlx.win, 2, 1L << 1 , keypress_event, info);
+	mlx_hook(info->mlx.win, 2, 1L << 1, keypress_event, info);
 	mlx_hook(info->mlx.win, DESTROYNOTIFY, 0, ft_exit, info);
 }
