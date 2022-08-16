@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:26:57 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/16 15:29:10 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:59:13 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@
 
 typedef struct s_ray
 {
-	int		mapX;
-	int		mapY;
-	double	lengthX;
-	double	lengthY;
-	double	nextTileX;
-	double	nextTileY;	
-	double	directionX;
-	double	directionY;
-	double	towardX;
-	double	towardY;
+	int		mapx;
+	int		mapy;
+	double	lengthx;
+	double	lengthy;
+	double	tilex;
+	double	tiley;	
+	double	directionx;
+	double	directiony;
+	double	towardx;
+	double	towardy;
 	int		hit;
-	double	perpWallDist;
+	double	perpwalldist;
 	int		side;
-	int		lineHeight;
-	int		drawStart;
-	int		drawEnd;
-	double	wallX;
-	int		texX;
+	int		lineheight;
+	int		draw_start;
+	int		draw_end;
+	double	wallx;
+	int		texx;
 	double	step;
-	double	texPos;
+	double	texpos;
 }	t_ray;
 
 int		*init_buffer(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movement.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 14:29:12 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/13 14:47:40 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/16 16:04:46 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void	up_movement(t_camera *camera, char **map)
 	double	directionx;
 	double	directiony;
 
-	directionx = camera->playerDirectionX;
-	directiony = camera->playerDirectionY;
-	if (map[(int)(camera->posY + directiony)][(int)camera->posX] == '0')
-			camera->posY += directiony;
-	if (map[(int)camera->posY][(int)(camera->posX + directionx)] == '0')
-		camera->posX += directionx;
+	directionx = camera->directionx * 0.3;
+	directiony = camera->directiony * 0.3;
+	if (map[(int)(camera->posy + directiony)][(int)camera->posx] == '0')
+			camera->posy += directiony;
+	if (map[(int)camera->posy][(int)(camera->posx + directionx)] == '0')
+		camera->posx += directionx;
 }
 
 // DOWN MOVEMENT -- key S
@@ -48,12 +48,12 @@ void	down_movement(t_camera *camera, char **map)
 	double	directionx;
 	double	directiony;
 
-	directionx = camera->playerDirectionX;
-	directiony = camera->playerDirectionY;
-	if (map[(int)(camera->posY - directiony)][(int)camera->posX] == '0')
-			camera->posY -= directiony;
-	if (map[(int)camera->posY][(int)(camera->posX - directionx)] == '0')
-		camera->posX -= directionx;
+	directionx = camera->directionx * 0.3;
+	directiony = camera->directiony * 0.3;
+	if (map[(int)(camera->posy - directiony)][(int)camera->posx] == '0')
+			camera->posy -= directiony;
+	if (map[(int)camera->posy][(int)(camera->posx - directionx)] == '0')
+		camera->posx -= directionx;
 }
 
 // RIGHT MOVEMENT -- key D
@@ -64,12 +64,12 @@ void	right_movement(t_camera *camera, char **map)
 	double	directionx;
 	double	directiony;
 
-	directionx = camera->screenX;
-	directiony = camera->screenY;
-	if (map[(int)(camera->posY + directiony)][(int)camera->posX] == '0')
-			camera->posY += directiony;
-	if (map[(int)camera->posY][(int)(camera->posX + directionx)] == '0')
-			camera->posX += directionx;
+	directionx = camera->screenx * 0.3;
+	directiony = camera->screeny * 0.3;
+	if (map[(int)(camera->posy + directiony)][(int)camera->posx] == '0')
+			camera->posy += directiony;
+	if (map[(int)camera->posy][(int)(camera->posx + directionx)] == '0')
+			camera->posx += directionx;
 }
 
 // LEFT MOVEMENT -- key A
@@ -80,10 +80,10 @@ void	left_movement(t_camera *camera, char **map)
 	double	directionx;
 	double	directiony;
 
-	directionx = camera->screenX;
-	directiony = camera->screenY;
-	if (map[(int)(camera->posY - directiony)][(int)camera->posX] == '0')
-			camera->posY -= directiony;
-	if (map[(int)camera->posY][(int)(camera->posX - directionx)] == '0')
-			camera->posX -= directionx;
+	directionx = camera->screenx * 0.3;
+	directiony = camera->screeny * 0.3;
+	if (map[(int)(camera->posy - directiony)][(int)camera->posx] == '0')
+			camera->posy -= directiony;
+	if (map[(int)camera->posy][(int)(camera->posx - directionx)] == '0')
+			camera->posx -= directionx;
 }

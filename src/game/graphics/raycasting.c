@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 16:14:22 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/14 16:15:18 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/16 16:02:16 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,21 @@ void	init_ray(t_ray *ray, t_game *info, double x)
 	t_camera	*camera;
 
 	camera = &info->camera;
-	camera->X = 2 * x / WIDTH - 1;
-	ray->directionX = camera->playerDirectionX + camera->screenX * camera->X;
-	ray->directionY = camera->playerDirectionY + camera->screenY * camera->X;
-	ray->nextTileX = fabs(1 / ray->directionX);
-	ray->nextTileY = fabs(1 / ray->directionY);
-	ray->mapX = (int)camera->posX;
-	ray->mapY = (int)camera->posY;
-	if (ray->directionX == 0)
-		ray->nextTileX = 1e30;
+	camera->x = 2 * x / WIDTH - 1;
+	ray->directionx = camera->directionx + camera->screenx * camera->x;
+	ray->directiony = camera->directiony + camera->screeny * camera->x;
+	ray->tilex = fabs(1 / ray->directionx);
+	ray->tiley = fabs(1 / ray->directiony);
+	ray->mapx = (int)camera->posx;
+	ray->mapy = (int)camera->posy;
+	if (ray->directionx == 0)
+		ray->tilex = 1e30;
 	else
-		ray->nextTileX = fabs(1 / ray->directionX);
-	if (ray->directionY == 0)
-		ray->nextTileY = 1e30;
+		ray->tilex = fabs(1 / ray->directionx);
+	if (ray->directiony == 0)
+		ray->tiley = 1e30;
 	else
-		ray->nextTileY = fabs(1 / ray->directionY);
+		ray->tiley = fabs(1 / ray->directiony);
 	ray->hit = 0;
 }
 
@@ -49,25 +49,25 @@ void	length_ray(t_ray *ray, t_game *info)
 	t_camera	*camera;
 
 	camera = &info->camera;
-	if (ray->directionX < 0)
+	if (ray->directionx < 0)
 	{
-		ray->towardX = -1;
-		ray->lengthX = (camera->posX - ray->mapX) * ray->nextTileX;
+		ray->towardx = -1;
+		ray->lengthx = (camera->posx - ray->mapx) * ray->tilex;
 	}
 	else
 	{
-		ray->towardX = 1;
-		ray->lengthX = (ray->mapX + 1.0 - camera->posX) * ray->nextTileX;
+		ray->towardx = 1;
+		ray->lengthx = (ray->mapx + 1.0 - camera->posx) * ray->tilex;
 	}
-	if (ray->directionY < 0)
+	if (ray->directiony < 0)
 	{
-		ray->towardY = -1;
-		ray->lengthY = (camera->posY - ray->mapY) * ray->nextTileY;
+		ray->towardy = -1;
+		ray->lengthy = (camera->posy - ray->mapy) * ray->tiley;
 	}
 	else
 	{
-		ray->towardY = 1;
-		ray->lengthY = (ray->mapY + 1.0 - camera->posY) * ray->nextTileY;
+		ray->towardy = 1;
+		ray->lengthy = (ray->mapy + 1.0 - camera->posy) * ray->tiley;
 	}
 }
 
@@ -75,25 +75,25 @@ void	find_wall(t_ray *ray, t_data *map)
 {
 	while (ray->hit == 0)
 	{
-		if (ray->lengthX < ray->lengthY)
+		if (ray->lengthx < ray->lengthy)
 		{
-			ray->lengthX += ray->nextTileX;
-			ray->mapX += ray->towardX;
+			ray->lengthx += ray->tilex;
+			ray->mapx += ray->towardx;
 			ray->side = 0;
 		}
 		else
 		{
-			ray->lengthY += ray->nextTileY;
-			ray->mapY += ray->towardY;
+			ray->lengthy += ray->tiley;
+			ray->mapy += ray->towardy;
 			ray->side = 1;
 		}
-		if (map->map[ray->mapY][ray->mapX] == '1')
+		if (map->map[ray->mapy][ray->mapx] == '1')
 			ray->hit = 1;
 	}
 	if (ray->side == 0)
-		ray->perpWallDist = (ray->lengthX - ray->nextTileX);
+		ray->perpwalldist = (ray->lengthx - ray->tilex);
 	else
-		ray->perpWallDist = (ray->lengthY - ray->nextTileY);
+		ray->perpwalldist = (ray->lengthy - ray->tiley);
 }
 
 void	get_wall_info(t_ray *ray, t_game *info)
@@ -101,21 +101,21 @@ void	get_wall_info(t_ray *ray, t_game *info)
 	t_camera	*camera;
 
 	camera = &info->camera;
-	ray->lineHeight = (int)(HEIGHT / ray->perpWallDist);
-	ray->drawStart = (-ray->lineHeight) / 2 + HEIGHT / 2;
-	ray->drawEnd = ray->lineHeight / 2 + HEIGHT / 2;
-	if (ray->drawStart < 0)
-		ray->drawStart = 0;
-	if (ray->drawEnd >= HEIGHT)
-		ray->drawEnd = HEIGHT - 1;
+	ray->lineheight = (int)(HEIGHT / ray->perpwalldist);
+	ray->draw_start = (-ray->lineheight) / 2 + HEIGHT / 2;
+	ray->draw_end = ray->lineheight / 2 + HEIGHT / 2;
+	if (ray->draw_start < 0)
+		ray->draw_start = 0;
+	if (ray->draw_end >= HEIGHT)
+		ray->draw_end = HEIGHT - 1;
 	if (ray->side == 0)
-		ray->wallX = camera->posY + ray->perpWallDist * ray->directionY;
+		ray->wallx = camera->posy + ray->perpwalldist * ray->directiony;
 	else
-		ray->wallX = camera->posX + ray->perpWallDist * ray->directionX;
-	ray->wallX -= floor(ray->wallX);
-	ray->texX = (int)(ray->wallX * (double)TEXWIDTH);
-	if (ray->side == 0 && ray->directionX > 0)
-		ray->texX = TEXWIDTH - ray->texX - 1;
-	if (ray->side == 1 && ray->directionY < 0)
-		ray->texX = TEXWIDTH - ray->texX - 1;
+		ray->wallx = camera->posx + ray->perpwalldist * ray->directionx;
+	ray->wallx -= floor(ray->wallx);
+	ray->texx = (int)(ray->wallx * (double)TEXWIDTH);
+	if (ray->side == 0 && ray->directionx > 0)
+		ray->texx = TEXWIDTH - ray->texx - 1;
+	if (ray->side == 1 && ray->directiony < 0)
+		ray->texx = TEXWIDTH - ray->texx - 1;
 }

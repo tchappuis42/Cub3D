@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 15:00:17 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/16 15:42:36 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 15:55:00 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 // The camera represent the player's point of view
 typedef struct s_camera
 {
-	double	posX;
-	double	posY;
-	double	playerDirectionx;
-	double	playerDirectionY;
-	double	screenX;
-	double	screenY;
-	double	X;
+	double	posx;
+	double	posy;
+	double	directionx;
+	double	directiony;
+	double	screenx;
+	double	screeny;
+	double	x;
 }t_camera;
 
 void	init_camera(t_camera *camera, double x, double y, char view);

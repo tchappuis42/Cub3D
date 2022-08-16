@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:11 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/16 14:55:59 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/16 16:05:41 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	minimap(t_mlx *mlx, t_data *map, t_camera *cam)
 	int		pos[4];
 
 	pos[0] = 0;
-	pos[2] = cam->posY;
-	pos[3] = cam->posX;
+	pos[2] = cam->posy;
+	pos[3] = cam->posx;
 	init_frame(&minimap, mlx, WIDTH / 5 + 10, HEIGHT / 5 + 10);
 	draw_cadre(&minimap);
 	while (pos[0] < map->h)

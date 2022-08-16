@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   event.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:31:03 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/15 15:51:33 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/16 16:07:57 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ int	is_movement(int keycode)
 void	player_rotation(int keycode, t_camera *camera)
 {
 	if (keycode == KEY_RIGHT)
-		rotation(camera, 0.5);
+		rotation(camera, 0.2);
 	else if (keycode == KEY_LEFT)
-		rotation(camera, -0.5);
+		rotation(camera, -0.2);
 }
 
 // Rotate the virtualScreen and the player's direction
@@ -65,12 +65,12 @@ void	rotation(t_camera *camera, double angle)
 	double		vectorx;
 	double		vectory;
 
-	vectorx = camera->playerDirectionX;
-	vectory = camera->playerDirectionY;
-	camera->playerDirectionX = vectorx * cos(angle) - vectory * sin(angle);
-	camera->playerDirectionY = vectorx * sin(angle) + vectory * cos(angle);
-	vectorx = camera->screenX;
-	vectory = camera->screenY;
-	camera->screenX = vectorx * cos(angle) - vectory * sin(angle);
-	camera->screenY = vectorx * sin(angle) + vectory * cos(angle);
+	vectorx = camera->directionx;
+	vectory = camera->directiony;
+	camera->directionx = vectorx * cos(angle) - vectory * sin(angle);
+	camera->directiony = vectorx * sin(angle) + vectory * cos(angle);
+	vectorx = camera->screenx;
+	vectory = camera->screeny;
+	camera->screenx = vectorx * cos(angle) - vectory * sin(angle);
+	camera->screeny = vectorx * sin(angle) + vectory * cos(angle);
 }

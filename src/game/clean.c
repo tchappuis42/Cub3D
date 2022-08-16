@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 17:43:48 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/15 16:39:43 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/15 17:10:06 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ void	free_texture(t_game *info)
 	i = 0;
 	while (i < 4)
 	{
-		free(info->texture[i]);
-		info->texture[i] = NULL;
+		if (info->texture[i] != NULL)
+		{
+			free(info->texture[i]);
+			info->texture[i] = NULL;
+		}
 		i++;
 	}
-	free(info->texture);
+	if (info->texture != NULL)
+		free(info->texture);
 	info->texture = NULL;
 }
 
