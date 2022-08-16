@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/16 15:23:47 by tchappui          #+#    #+#             */
+/*   Updated: 2022/08/16 15:23:49 by tchappui         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #ifndef STRUCT_H
-#define STRUCT_H
+# define STRUCT_H
 
-enum // t as le droit bg ?
+enum
 {
 	KEY_A = 0,
 	KEY_S = 1,
@@ -55,22 +66,22 @@ enum // t as le droit bg ?
 
 enum
 {
-	KEYPRESS = 2,	   // int (*f)(int keycode, void *param)
-	KEYRELEASE = 3,	   // int (*f)(int keycode, void *param)
-	BUTTONPRESS = 4,   // int (*f)(int button, int x, int y, void *param)
-	BUTTONRELEASE = 5, // int (*f)(int button, int x, int y, void *param)
-	MOTIONNOTIFY = 6,  // int (*f)(int x, int y, void *param)
+	KEYPRESS = 2,
+	KEYRELEASE = 3,
+	BUTTONPRESS = 4,
+	BUTTONRELEASE = 5,
+	MOTIONNOTIFY = 6,
 	ENTERNOTIFY = 7,
 	LEAVENOTIFY = 8,
 	FOCUSIN = 9,
 	FOCUSOUT = 10,
 	KEYMAPNOTIFY = 11,
-	EXPOSE = 12, // int (*f)(void *param)
+	EXPOSE = 12,
 	GRAPHICSEXPOSE = 13,
 	NOEXPOSE = 14,
 	VISIBILITYNOTIFY = 15,
 	CREATENOTIFY = 16,
-	DESTROYNOTIFY = 17, // int (*f)(void *param)
+	DESTROYNOTIFY = 17,
 	UNMAPNOTIFY = 18,
 	MAPNOTIFY = 19,
 	MAPREQUEST = 20,
@@ -92,25 +103,23 @@ enum
 	LASTEVENT = 36
 };
 
-
-
 typedef struct s_frame
 {
-	void *ptr;	// pointer to manipulate the image
-	int *buff; // tab of the image's pixels
-	int bpp;	// bits per pixel
-	int line;	// number of bits in a line
-	int argb;	// argb or bgra
-	int color;	// color of the image
-	int width;	// width of the image
-	int height; // height of the image
-} t_frame;
+	void	*ptr;
+	int		*buff;
+	int		bpp;
+	int		line;
+	int		argb;
+	int		color;
+	int		width;
+	int		height;
+}	t_frame;
 
-typedef struct s_mlx // écran
+typedef struct s_mlx
 {
-	void *ptr; // -> pointeur sur la mlx
-	void *win; // pointeur sur la window
+	void	*ptr;
+	void	*win;
 	t_frame	*frame;
-} t_mlx;
+}	t_mlx;
 
 #endif
