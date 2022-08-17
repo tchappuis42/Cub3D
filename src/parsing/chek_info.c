@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   chek_info.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:25:21 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/15 15:55:18 by tweimer          ###   ########.fr       */
+/*   Updated: 2022/08/17 15:47:58 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ static void	forbiden_char(t_data *data, int y, int w)
 			{
 				if (data->p != 0)
 					exit_map(4, data);
-				data->px = i;
-				data->py = y;
+				data->px = i + 0.5;
+				data->py = y + 0.5;
 				data->p = data->map[y][i];
 				data->map[y][i] = '0';
 			}
@@ -81,12 +81,10 @@ static void	map_border(t_data *data, int y, int w)
 	}
 }
 
-void	chek_info(t_data *data, char *map)
+void	chek_info(t_data *data)
 {
 	int	y;
 
-	if (ft_strncmp(map + ft_strlen(map) - 4, ".cub", 5) != 0)
-		exit_map(4, data);
 	y = 0;
 	while (data->map[y])
 	{

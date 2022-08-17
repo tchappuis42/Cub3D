@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:00:06 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/16 17:05:42 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:31:38 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ void	parsing_info(t_data *data, t_tex *tex, char *map)
 	char	**tab_read;
 	int		fd;
 
-	fd = openfd(map);
+	fd = openfd(map, data);
 	read = get_next_line(fd);
+	if (read == NULL)
+		exit_map(9, data);
 	tab_read = ft_split(read, ' ');
 	while (info_f(tex))
 	{

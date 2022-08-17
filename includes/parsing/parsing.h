@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 17:28:41 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/16 15:36:12 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:31:53 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ typedef struct s_data
 	char	**map;
 	int		h;
 	int		w;
-	double	px;
-	double	py;
+	float	px;
+	float	py;
 	char	p;
 	int		i;
 	t_tex	*tex;
 }	t_data;
 
-int		openfd(char *map);
+int		openfd(char *map, t_data *data);
 void	parsing_info(t_data *data, t_tex *tex, char *map);
 void	parsing_map(t_data *data, char *map);
 void	get_info_map(char *map, t_data *data);
-void	chek_info(t_data *data, char *map);
+void	chek_info(t_data *data);
 void	exit_map(int type, t_data *data);
 int		get_color(char *str, t_data *data);
 void	parsing_texture(t_data *data);

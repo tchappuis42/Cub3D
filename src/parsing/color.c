@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 15:35:17 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/16 18:05:49 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:41:56 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	get_color(char *str, t_data *data)
 	int		b;
 
 	tab = ft_split(str, ',');
-	if (ft_tablen(tab) > 3)
+	if (ft_tablen(tab) != 3)
 		clean_color(tab, data, 1);
 	r = ft_atoi(tab[0]);
 	if (r > 255 || r < 0)

@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:57:07 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/16 17:04:51 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 15:32:34 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	get_info_map(char *map, t_data *data)
 	int		i;
 
 	i = data->i - 1;
-	fd = openfd(map);
+	fd = openfd(map, data);
 	read = get_next_line(fd);
 	while (i-- >= 0 || read[0] == '\n')
 	{
@@ -60,7 +60,7 @@ int	init_map_parsing(char *map, t_data *data)
 {
 	int	fd;
 
-	fd = openfd(map);
+	fd = openfd(map, data);
 	data->map = calloc(data->h + 1, sizeof (char *));
 	if (!data->map)
 		exit_map(7, data);
