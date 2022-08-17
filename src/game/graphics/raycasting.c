@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/14 16:14:22 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 16:02:16 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:50:37 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	get_wall_info(t_ray *ray, t_game *info)
 	if (ray->draw_start < 0)
 		ray->draw_start = 0;
 	if (ray->draw_end >= HEIGHT)
-		ray->draw_end = HEIGHT - 1;
+		ray->draw_end = HEIGHT;
 	if (ray->side == 0)
 		ray->wallx = camera->posy + ray->perpwalldist * ray->directiony;
 	else

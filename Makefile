@@ -5,7 +5,7 @@ WHITE	= \033[1;37m
 GREEN	= \033[1;32m
 RESET	= \033[0m
 
-NAME 	:= Cub3d
+NAME 	:= cub3d
 CC 		:= gcc
 CFLAGS	= -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_INC) -I $(MLX_INC) -g3 -fsanitize=address
 

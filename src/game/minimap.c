@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:11 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/17 16:00:15 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:53:52 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,5 @@ void	minimap(t_mlx *mlx, t_data *map, t_camera *cam)
 	}
 	draw_player(&minimap, pos, 0XFF0000, map);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, minimap.ptr, 5, 5);
+	mlx_destroy_image(mlx->ptr, minimap.ptr);
 }
