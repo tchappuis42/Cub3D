@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:00:06 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/17 15:31:38 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:47:22 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,8 @@ void	parsing_info(t_data *data, t_tex *tex, char *map)
 		data->i++;
 	}
 	free (read);
-	ft_tabfree(tab_read);
+	if (tab_read != NULL)
+		ft_tabfree(tab_read);
 	remove_enter(tex);
 	close(fd);
 }

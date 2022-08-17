@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:25:21 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/17 15:47:58 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:26:18 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,5 @@ void	chek_info(t_data *data)
 		y++;
 	}
 	if (data->p == 0)
-		exit_map(4, data);
+		exit_map(2, data);
 }

@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 18:57:07 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/17 15:32:34 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:47:09 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	get_info_map(char *map, t_data *data)
 	{
 		free(read);
 		read = get_next_line(fd);
+		if (read == NULL)
+			exit_map(6, data);
 	}
 	while (read != NULL)
 	{

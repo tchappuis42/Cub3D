@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 15:18:51 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/17 15:36:48 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:46:46 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	exit_map(int type, t_data *data)
 	if (type == 5)
 		write(2, "Error : format color\n", 21);
 	if (type == 6)
-		write(2, "Error : format map\n", 19);
+		write(2, "Error : map invalid\n", 20);
 	if (type == 7)
 		write(2, "Error : malloc error\n", 21);
 	if (type == 8)
