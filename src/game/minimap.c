@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 14:16:11 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/17 16:53:52 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:06:01 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,8 @@ void	minimap(t_mlx *mlx, t_data *map, t_camera *cam)
 	draw_cadre(&minimap);
 	while (pos[0] < map->h)
 	{
-		pos[1] = 0;
-		while (pos[1] < map->w)
+		pos[1] = -1;
+		while (++pos[1] < map->w)
 		{
 			if (map->map[pos[0]][pos[1]] == '1')
 				draw_rectangle(&minimap, pos, 0x4E4E4E, map);
@@ -104,7 +104,6 @@ void	minimap(t_mlx *mlx, t_data *map, t_camera *cam)
 				draw_rectangle(&minimap, pos, 0xF0DDC5, map);
 			if (map->map[pos[0]][pos[1]] == ' ')
 				draw_rectangle(&minimap, pos, 0x848483, map);
-			pos[1]++;
 		}
 		pos[0]++;
 	}

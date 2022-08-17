@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 17:26:35 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 17:07:05 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 17:04:40 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,6 @@ int	main(int argc, char **argv)
 		parsing(&data, &tex, argv[1]);
 		game_start(&data, &tex);
 	}
+	else
+		write(2, "Error: invalid args\n", 20);
 }
