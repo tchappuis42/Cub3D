@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 15:18:51 by tchappui          #+#    #+#             */
-/*   Updated: 2022/08/16 16:47:07 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 13:48:44 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,21 @@ void	free_tex(t_tex *tex)
 void	exit_map(int type, t_data *data)
 {
 	if (type == 1)
-		printf("Error : bordures\n");
+		write(2, "Error : bordures\n", 17);
 	if (type == 2)
-		printf("Error : pas de player\n");
+		write(2, "Error : pas de player\n", 22);
 	if (type == 3)
-		printf("Error : forbiden char\n");
+		write(2, "Error : forbiden char\n", 22);
 	if (type == 4)
-		printf("Error : trop de player\n");
+		write(2, "Error : trop de player\n", 23);
 	if (type == 5)
-		printf("Error : color\n");
+		write(2, "Error : color\n", 14);
 	if (type == 6)
-		printf("Error : \n");
+		write(2, "Error : \n", 9);
 	if (type == 7)
-		printf("Error : Malloc error\n");
+		write(2, "Error : Malloc error\n", 21);
 	if (type == 8)
-		printf("Error : texture file\n");
+		write(2, "Error : texture file\n", 21);
 	if (data->map != NULL)
 		ft_tabfree(data->map);
 	free_tex(data->tex);
