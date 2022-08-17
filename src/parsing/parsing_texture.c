@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_texture.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
+/*   By: tweimer <tweimer@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 10:15:08 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/16 18:05:26 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/17 16:16:02 by tweimer          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void	parsing_texture(t_data *data)
 {
 	char	*expected;
 
+	if (TEXHEIGHT > HEIGHT || TEXWIDTH > WIDTH)
+		exit_map(8, data);
 	expected = expected_line();
 	if (!check_file(data->tex->path_no, expected)
 		|| !check_file(data->tex->path_so, expected)
