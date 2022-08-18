@@ -1,8 +1,8 @@
-NO ./assets/grass2.xpm
-SO ./path_to_the_south_texture
-WE         ./path_to_the_west_texture
+NO ./assets/hsabir.xpm
+SO ./assets/hsabir1.xpm
+WE  ./assets/hsabir1.xpm
 
-EA    ./path_to_the_east_texture
+EA   ./assets/hsabir.xpm
 
 F       250,100,0
 C      225,30,0
