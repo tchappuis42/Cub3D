@@ -7,7 +7,7 @@ RESET	= \033[0m
 
 NAME 	:= cub3d
 CC 		:= gcc
-CFLAGS	= -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_INC) -I $(MLX_INC) -g3 -fsanitize=address
+CFLAGS	= -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_INC) -I $(MLX_INC)# -g3 -fsanitize=address
 
 SRC_DIR := ./src/
 OBJ_DIR	:= ./obj/
