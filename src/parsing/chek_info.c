@@ -6,7 +6,7 @@
 /*   By: tchappui <tchappui@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 16:25:21 by tweimer           #+#    #+#             */
-/*   Updated: 2022/08/17 16:26:18 by tchappui         ###   ########.fr       */
+/*   Updated: 2022/08/22 13:39:09 by tchappui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,20 @@ static void	borders_x(t_data *data, int y)
 	x = 0;
 	while (data->map[y][x])
 	{
-		if (data->map[y][x] != '1' && data->map[y][x] != ' ')
+		if (data->map[y][x] == ' ')
+		{
+			if (y == 0)
+			{
+				if (data->map[y + 1][x] != '1' && data->map[y + 1][x] != ' ')
+					exit_map(1, data);
+			}
+			if (y == data->h - 1)
+			{
+				if (data->map[y - 1][x] != '1' && data->map[y - 1][x] != ' ')
+					exit_map(1, data);
+			}
+		}
+		else if (data->map[y][x] != '1')
 			exit_map(1, data);
 		x++;
 	}
@@ -31,6 +44,16 @@ static void	borders_y(t_data *data, int y, int w)
 		exit_map(1, data);
 	if (data->map[y][w] != '1' && data->map[y][w] != ' ')
 		exit_map(1, data);
+	if (data->map[y][0] == ' ')
+	{
+		if (data->map[y][1] != '1' && data->map[y][1] != ' ')
+			exit_map(1, data);
+	}
+	if (data->map[y][w] == ' ')
+	{
+		if (data->map[y][w - 1] != '1' && data->map[y][w - 1] != ' ')
+			exit_map(1, data);
+	}
 }
 
 static void	forbiden_char(t_data *data, int y, int w)
